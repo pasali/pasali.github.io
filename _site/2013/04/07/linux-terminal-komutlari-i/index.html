@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Linux Terminal Komutları I &middot; Mehmet Başal
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+  <center>
+    <header class="sidebar-header" role="banner">
+      <a href="/">
+	<img src="/images/profile.jpg" class="img-circle" 
+	  weight="200" height="200" />
+      </a>
+    </header>
+  </center>
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Mehmet Başal
+        </a>
+      </h1>
+      <p class="lead">Başta Android OS olmak üzere çeşitli ortamlar için yazılım geliştiren, işssiz bir Bilgisayar Mühendisi.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Anasayfa</a>
+      <a href="http://mhmtbsl.net/fo">Sunumlar</a>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">Hakkında</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+    </nav>
+
+      <div class="soc">
+    <a href="http://twitter.com/p4s4li" >
+      <div class="social">&#62217;</div></a>
+    <a href="https://github.com/pasali">
+	<div class="social">&#62208;</div></a>
+     <a href="http://facebook.com/mhmtbsl53" >
+       <div class="social">&#62220;</div></a>
+    <a href="https://linkedin.com/in/pasali">
+      <div class="social">&#62232;</div></a>
+
+</div>
+
+    <p>&copy; 2014. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Linux Terminal Komutları I</h1>
+  <span class="post-date">07 Apr 2013</span>
+  <p>Az çok linux(Unix) işletim sistemi ile ilgisi olanlar komut satırını kullanmanın sağladığı gücü bilir.
+Bizde terminal komutlarını giriş yapalım. Burda temel komutları anlatmayı deneyeceğim. Bende daha öğrenme aşamasında olduğum için
+hatamız olursa kusuruma bakmayın.
+&lt;!-- more --&gt;</p>
+
+<h3>cd</h3>
+
+<p>Açılımı <em>Change Directory</em> Türkçe meali ile &quot;Dizin Değiştir&quot;.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> /Dosya/yolu <span class="c">#=&gt; Yolu verilen dizine götürür.</span>
+    <span class="nb">cd</span>             <span class="c">#=&gt; Home(ev) dizinine götürür.</span>
+    <span class="nb">cd</span> ..          <span class="c">#=&gt; Bir üst dizine götürür.</span></code></pre></div>
+
+<h3>pwd</h3>
+
+<p>Açılımı <em>Print Working Directory</em> Türkçe meali ile &quot;Çalışma Dizinini Yazdır&quot;</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">pwd</span>            <span class="c">#=&gt; İçinde bulunulan dizini gösterir.</span>
+    /home/mhmt/Downloads</code></pre></div>
+
+<h3>ls</h3>
+
+<p>Açılımı <em>Change Directory</em> Türkçe meali ile &quot;Dizin Değiştir&quot;.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ls            <span class="c">#=&gt; İçinde bulunulan dizindeki dosya ve klasörleri listeler.</span>
+    ls -a         <span class="c">#=&gt; Bütün gizli dosyalar ve klasörlerle beraber  listeler.</span>
+    ls -l         <span class="c">#=&gt; Dosyaların izinlerini, sahiplerini, boyutlarını</span>
+                  <span class="c">#=&gt; ve son güncellenme tarihlerini ile beraber listeler.</span>
+    ls -d         <span class="c">#=&gt; Sadece dizinleri listeler.</span>
+    ls -ld        <span class="c">#=&gt; Verilen dizinin bilgilerini listeler.</span>
+    ls /dizin     <span class="c">#=&gt; Verilen dizinin içini listeler.</span></code></pre></div>
+
+<h3>mkdir</h3>
+
+<p>Açılımı <em>Make Directory</em> Türkçe meali ile &quot;Dizin Oluştur&quot;.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mkdir dizin           <span class="c">#=&gt; Dizin adlı klasör oluşturur.</span>
+    mkdir -p foo/bar/baz  <span class="c">#=&gt; İç içe dizinler oluştur.</span></code></pre></div>
+
+<h3>touch</h3>
+
+<p><em>touch</em> verilen isimde dosya oluştur. Eğer dosya varsa günceller.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">touch foo.txt</code></pre></div>
+
+<h3>rm</h3>
+
+<p>&quot;ReMove&quot; verilen dizin yada dosyayı siler.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">rm foo.txt          <span class="c">#=&gt; foo.txt&#39;i siler.</span>
+    rm -d               <span class="c">#=&gt; Boş dizini siler.</span>
+    rm -f               <span class="c">#=&gt; Dizinin boş yada dolu olmasını umursamaz.</span>
+    rm -r               <span class="c">#=&gt; İç içe dizinleri siler.</span></code></pre></div>
+
+</div>
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'mhmtbsl'; // required: replace example with your 
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<div class="related">
+  <h2>Benzer Yazılar</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2014/02/12/android-asynctask-kullanimi/">
+            Android - AsyncTask Kullanımı
+            <small>12 Feb 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/android/notification/bildirim/olu%C5%9Fturma/2014/01/31/android-bildirim-notification-olusturma/">
+            Android - Bildirim(Notification) Oluşturma
+            <small>31 Jan 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2014/01/30/android-sunucuya-terminalden-baglanma/">
+            Android Sunucuya Terminalden Bağlanma
+            <small>30 Jan 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

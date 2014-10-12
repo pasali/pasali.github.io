@@ -1,0 +1,30 @@
+# Dependencies
+markdown:         redcarpet
+pygments:         true
+
+# Permalinks
+permalink:        pretty
+
+# Setup
+title:            Mehmet Başal
+tagline:          'Kişisel Blog'
+description:      'Bilgisayar Mühendisi.'
+url:              http://mhmtbsl.net
+baseurl:          /
+
+author:
+  name:           'Mehmet Başal'
+  url:            https://mhmtbsl.net
+  github:         pasali
+  facebook:        mhmtbsl53
+  twitter:        p4s4li
+  linkedin:       pasali
+  mail:           mhmtbsl@gmail.com
+
+paginate:         5
+
+# Custom vars
+version:          2.1.0
+
+github:
+  repo:

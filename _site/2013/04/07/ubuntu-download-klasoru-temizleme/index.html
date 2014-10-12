@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Ubuntu Download Klasörü Temizleme &middot; Mehmet Başal
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+  <center>
+    <header class="sidebar-header" role="banner">
+      <a href="/">
+	<img src="/images/profile.jpg" class="img-circle" 
+	  weight="200" height="200" />
+      </a>
+    </header>
+  </center>
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Mehmet Başal
+        </a>
+      </h1>
+      <p class="lead">Başta Android OS olmak üzere çeşitli ortamlar için yazılım geliştiren, işssiz bir Bilgisayar Mühendisi.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Anasayfa</a>
+      <a href="http://mhmtbsl.net/fo">Sunumlar</a>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">Hakkında</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+    </nav>
+
+      <div class="soc">
+    <a href="http://twitter.com/p4s4li" >
+      <div class="social">&#62217;</div></a>
+    <a href="https://github.com/pasali">
+	<div class="social">&#62208;</div></a>
+     <a href="http://facebook.com/mhmtbsl53" >
+       <div class="social">&#62220;</div></a>
+    <a href="https://linkedin.com/in/pasali">
+      <div class="social">&#62232;</div></a>
+
+</div>
+
+    <p>&copy; 2014. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Ubuntu Download Klasörü Temizleme</h1>
+  <span class="post-date">07 Apr 2013</span>
+  <p>Boş zamanlarında sürekli benim gibi film-dizi izleyenlerin genelde (en azından bende öyle) indirilenler klasöründe
+altyazılar,torrent dosyaları, arşivler ve film afişleri gibi bir sürü tek kulanımlık dosyalar olur. Her seferinde elle silmek biraz zaman aldığından bu işi benim için yapacak ufak bir kabuk betiği yazdım.
+&lt;!-- more --&gt;
+Kodlarımız şöyle:
+``` bash</p>
+
+<h1>!/bin/bash</h1>
+
+<p>case &quot;$1&quot; in
+   &quot;-s&quot;)
+        echo &quot; &#39;srt&#39; ve &#39;sub&#39; uzantılı dosyalar silenecek?(e/h)&quot;
+        read secim
+        if [ &quot;$secim&quot;==[eE] ]
+        then
+            rm -rf $HOME/Downloads/<em>.srt &amp;&amp; rm -rf $HOME/Downloads/</em>.sub
+        fi
+    exit 1
+    ;;
+    &quot;-t&quot;)
+        echo &quot;&#39;torrent&#39; uzantılı dosyalar silenecek?(e/h)&quot;
+        read secim
+        if [ &quot;$secim&quot;==[eE] ]
+        then
+            rm -rf $HOME/Downloads/<em>.torrent
+        fi
+    exit 1
+    ;;
+    &quot;-a&quot;)
+        echo &quot;Downloads dizinindeki tüm  dosyalar silenecek?(e/h)&quot;
+        read secim
+        if [ &quot;$secim&quot;==[eE] ]
+        then
+            rm -rf $HOME/Downloads/</em>
+        fi
+        ;;
+    &quot;-n&quot;)
+        path=$(find Downloads/ -type f -name $2)
+        echo $path
+        echo &quot;Silinsin mi?(e/h)&quot;
+        read secim
+        if [ &quot;$secim&quot;==[eE] ]
+        then
+            rm -rf &quot;$path&quot;
+        fi
+        ;;
+    &quot;-e&quot;)
+        echo &quot;$2 uzantılı dosyalar silinecek?(e/h)&quot;
+        read secim
+        if [ &quot;$secim&quot;==[eE] ]
+        then
+            rm -rf Downloads/*.&quot;$2&quot;
+        fi
+        ;;
+esac
+```</p>
+
+<h3>Kodu Çalıştırma</h3>
+
+<p>Öncelikle ev dizinde bin adında bir klasör oluşturun.<br>
+  Betiği bin klasörünün içine atın.<br>
+  Sonra betiğe çalışma izini verin.<br>
+<code>bash
+    sudo chmod +a bin/[dosya_ismi]
+</code>
+.bashrc dosyasına alttaki satırı ekleyin
+<code>bash
+    PATH=$PATH:$HOME/bin
+</code>
+artık dosya ismini yazarak betiği çalıştırabilirsiniz.<br></p>
+
+<h3>Kullanımı</h3>
+
+<p><strong>-t</strong>   =&gt; torrent uzantılı dosyaları siler.<br>
+<strong>-s</strong>   =&gt; srt ver sub uzantlı dosyaları siler.<br>
+<strong>-a</strong>   =&gt; bütün dosyaları siler.<br>
+<strong>-n</strong>   =&gt; verilen isimli dosyayı siler.<br>
+<strong>-e</strong>   =&gt; verilen uzantılı dosyaları siler.<br></p>
+
+<p>Not:</p>
+
+<p>Ubuntuyu Türkçe kullanıyorsanız. Downloads&#39;ı kendinizdeki isimle değiştirin.</p>
+
+</div>
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'mhmtbsl'; // required: replace example with your 
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<div class="related">
+  <h2>Benzer Yazılar</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2014/02/12/android-asynctask-kullanimi/">
+            Android - AsyncTask Kullanımı
+            <small>12 Feb 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/android/notification/bildirim/olu%C5%9Fturma/2014/01/31/android-bildirim-notification-olusturma/">
+            Android - Bildirim(Notification) Oluşturma
+            <small>31 Jan 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2014/01/30/android-sunucuya-terminalden-baglanma/">
+            Android Sunucuya Terminalden Bağlanma
+            <small>30 Jan 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

