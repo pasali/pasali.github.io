@@ -1,163 +1,289 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+<html class="no-js">
 
   <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-  <!-- Enable responsiveness on mobile devices-->
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
-
-  <title>
-    
-      Mehmet Başal &middot; Kişisel Blog
-    
-  </title>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/public/css/poole.css">
-  <link rel="stylesheet" href="/public/css/syntax.css">
-  <link rel="stylesheet" href="/public/css/hyde.css">
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=PT+Sans:400,400italic,700|Abril+Fatface">
-
-  <!-- Icons -->
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/public/apple-touch-icon-144-precomposed.png">
-                                 <link rel="shortcut icon" href="/public/favicon.ico">
-
-  <!-- RSS -->
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+	<meta charset="utf-8">
+	<title> Mehmet Başal</title>
+	<meta name="description" content="A website with blog posts, and pages.">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	
+	<!-- Canonical -->
+	<link rel="canonical" href="http://pasali.me/">
+	
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Mehmet Başal" href="http://pasali.me/feed.xml" />
+	
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	
+	<!-- Google Fonts -->
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+	<!-- Google Analytics -->
+	
 </head>
 
 
   <body>
+    <header class="site-header">
+
+	<div class="branding">
+		
+		<img class="avatar" src="/img/avatar.png" alt=""/>
+		
+		
+		<h1 class="site-title">
+			<a href="/">Mehmet Başal</a>
+		</h1>
+	</div>
+	
+	<nav class="site-nav">
+		<ul>
+			
+				
+			
+				
+				<li>
+					<a class="page-link" href="/about/">About</a>
+				</li>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:mhmtbsl@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/pasali" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.linkedin.com/in/pasali" title="Follow on LinkedIn">
+		<i class="fa fa-fw fa-linkedin"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/p4s4li" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+		</ul>
+	</nav>
+	
+</header>
+
+
+    <div class="content">
+      <div class="home">
+
+  
+
+  <div class="posts">
+    
+    <div class="post-teaser">
+    
+      <header>
+        <h1>
+          <a class="post-link" href="/2014/02/12/android-asynctask-kullanimi.html">Android - AsyncTask Kullanımı</a>
+        </h1>
+        
+        <p class="meta">February 12, 2014</p>
+      </header>
+
+      <div class="excerpt">
+        <p><code>AsyncTask</code>, ana thread ile arka plan işlemlerini birleştirmemize sağlıyan güzide
+bir Android sınıfı. Bilindiği üzere bazı sebeblerden (mesela <code>performans</code>) dolayı
+Android&#39;i geliştiren abilerimiz ana thread bazı işlemleri yapmamızı
+yasaklamışlar(<code>Network</code> işlemleri gibi). Kullanmamız için bize <code>Thread</code> sınıfını
+özelleştirip <code>AsyncTask</code> sınıfını sunmuşlar. <code>Thread</code>lerden farklı olarak
+arka plan işlemi hakkında aşama aşama bilgi sahibi olabiliyoruz. &lt;!-- more --&gt;  </p>
+
+
+        <a class="button" href="/2014/02/12/android-asynctask-kullanimi.html">Devamını oku</a>
+      </div>
+      
+    </div>
+    
+    <div class="post-teaser">
+    
+      <header>
+        <h1>
+          <a class="post-link" href="/android/notification/bildirim/olu%C5%9Fturma/2014/01/31/android-bildirim-notification-olusturma.html">Android - Bildirim(Notification) Oluşturma</a>
+        </h1>
+        
+        <p class="meta">January 31, 2014</p>
+      </header>
+
+      <div class="excerpt">
+        <p>Android uygulama geliştirirken biraz daha kullanıcı dostu olmak için
+bildirimleri kullanabilirsiniz. Kullanıcı dostu olmanın yanında uygulamanın
+türüne göre kullanıcıya istediğiniz durumlarda bilgi verebilirsiniz. Mesela bir
+doviz uygulaması geliştiriyorsunuz ve dolar belirli bir seviyenin üstüne
+çıktığında ya da düştüğünde kullanıcıyı bilgilendirmek isteyebilirsiniz.   </p>
+
+
+        <a class="button" href="/android/notification/bildirim/olu%C5%9Fturma/2014/01/31/android-bildirim-notification-olusturma.html">Devamını oku</a>
+      </div>
+      
+    </div>
+    
+    <div class="post-teaser">
+    
+      <header>
+        <h1>
+          <a class="post-link" href="/2014/01/30/android-sunucuya-terminalden-baglanma.html">Android Sunucuya Terminalden Bağlanma</a>
+        </h1>
+        
+        <p class="meta">January 30, 2014</p>
+      </header>
+
+      <div class="excerpt">
+        <p>Android üzerinde çalışan bir sunucuya terminalden nasıl bağlanırız ?<br>
+Öncelikle sunucunun <code>1234</code> nolu port üzerinde çalıştığını varsayalım. Uygulamanızı
+AVD üzerinde çalıştırın ve sunucuyu aktif hale getirin. &lt;!-- more --&gt;Şimdi <code>telnet</code> ile AVD
+ye bağlanmamız gerek. AVD&#39;nin port numarası pencere başlığında yazar.(genelde
+5554 tür)</p>
+
+
+        <a class="button" href="/2014/01/30/android-sunucuya-terminalden-baglanma.html">Devamını oku</a>
+      </div>
+      
+    </div>
+    
+    <div class="post-teaser">
+    
+      <header>
+        <h1>
+          <a class="post-link" href="/2014/01/29/android-networkonmainthreadexception.html">Android - NetworkOnMainThreadException</a>
+        </h1>
+        
+        <p class="meta">January 29, 2014</p>
+      </header>
+
+      <div class="excerpt">
+        <p>Eğer network işlemleri yapan bir android uygulaması geliştiriyorsanız, büyük ihtimal ile yukarıda başlıkta yazdığım hata ile 
+karşılaşmıssınızdır. &lt;!-- more --&gt;
+Aslında internette çok küçük bir araştırma yaparak bu konu hakkında yazılmış sorulara ve verilen cevaplara ulaşabilirsiniz.</p>
+
+
+        <a class="button" href="/2014/01/29/android-networkonmainthreadexception.html">Devamını oku</a>
+      </div>
+      
+    </div>
+    
+    <div class="post-teaser">
+    
+      <header>
+        <h1>
+          <a class="post-link" href="/2013/10/05/debian-slash-ubuntu-golang-kurulumu.html">Debian/Ubuntu Golang Kurulumu</a>
+        </h1>
+        
+        <p class="meta">October 5, 2013</p>
+      </header>
+
+      <div class="excerpt">
+        <p>Sisteminize uygun sürümü <a href="http://code.google.com/p/go/downloads/list">indirin</a>
+Eğer önceden kurulum yaptıysanız aşağıdaki komutu çalıştırın &lt;!-- more --&gt;</p>
+
+
+        <a class="button" href="/2013/10/05/debian-slash-ubuntu-golang-kurulumu.html">Devamını oku</a>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="pagination">
+  
+    
+    <span class="button disabled" class="button" >
+      <i class="fa fa-chevron-left"></i> 
+      Önceki
+    </span>
+    
 
     
-<div class="sidebar">
-  <div class="container sidebar-sticky">
-  <center>
-    <header class="sidebar-header" role="banner">
-      <a href="/">
-	<img src="/images/profile.jpg" class="img-circle" 
-	  weight="200" height="200" />
-      </a>
-    </header>
-  </center>
-    <div class="sidebar-about">
-      <h1>
-        <a href="/">
-          Mehmet Başal
-        </a>
-      </h1>
-      <p class="lead">Başta Android OS olmak üzere çeşitli ortamlar için yazılım geliştiren, işssiz bir Bilgisayar Mühendisi.</p>
-    </div>
-
-    <nav class="sidebar-nav">
-      <a class="sidebar-nav-item active
-	" href="/">Anasayfa</a>
-      <a href="http://mhmtbsl.net/fo">Sunumlar</a>
-      
-
-      
-      
-        
-          
-        
-      
-        
-          
-            <a class="sidebar-nav-item" href="/about/">Hakkında</a>
-          
-        
-      
-        
-      
-        
-          
-        
-      
-        
-          
-        
-      
-        
-          
-        
-      
-    </nav>
-
-      <div class="soc">
-    <a href="http://twitter.com/p4s4li" >
-      <div class="social">&#62217;</div></a>
-    <a href="https://github.com/pasali">
-	<div class="social">&#62208;</div></a>
-     <a href="http://facebook.com/mhmtbsl53" >
-       <div class="social">&#62220;</div></a>
-    <a href="https://linkedin.com/in/pasali">
-      <div class="social">&#62232;</div></a>
-
-</div>
-
-    <p>&copy; 2014. All rights reserved.</p>
+    <a href="/blog/page2" class="button" >
+      Sonraki 
+      <i class="fa fa-chevron-right"></i>
+    </a>
+    
+    
   </div>
-</div>
-
-
-    <div class="content container">
-        
-  <div class="post">
-	  <span class="post-date">Feb 12, 2014</span>
-   <a href="/2014/02/12/android-asynctask-kullanimi/" class="post-link">
-	  <h1 class="post-title">Android - AsyncTask Kullanımı</h3>
-	</a>
-	  <p class="post-summary"></p>
-      </div>
-  
-  <div class="post">
-	  <span class="post-date">Jan 31, 2014</span>
-   <a href="/android/notification/bildirim/olu%C5%9Fturma/2014/01/31/android-bildirim-notification-olusturma/" class="post-link">
-	  <h1 class="post-title">Android - Bildirim(Notification) Oluşturma</h3>
-	</a>
-	  <p class="post-summary"></p>
-      </div>
-  
-  <div class="post">
-	  <span class="post-date">Jan 30, 2014</span>
-   <a href="/2014/01/30/android-sunucuya-terminalden-baglanma/" class="post-link">
-	  <h1 class="post-title">Android Sunucuya Terminalden Bağlanma</h3>
-	</a>
-	  <p class="post-summary"></p>
-      </div>
-  
-  <div class="post">
-	  <span class="post-date">Jan 29, 2014</span>
-   <a href="/2014/01/29/android-networkonmainthreadexception/" class="post-link">
-	  <h1 class="post-title">Android - NetworkOnMainThreadException</h3>
-	</a>
-	  <p class="post-summary"></p>
-      </div>
-  
-  <div class="post">
-	  <span class="post-date">Oct 5, 2013</span>
-   <a href="/2013/10/05/debian-slash-ubuntu-golang-kurulumu/" class="post-link">
-	  <h1 class="post-title">Debian/Ubuntu Golang Kurulumu</h3>
-	</a>
-	  <p class="post-summary"></p>
-      </div>
-  
-
-
-<div class="pagination">
-  
-    <a class="pagination-item older" href="
-      /page2">Eski</a>
-  
-  
-    <span class="pagination-item newer">Yeni</span>
   
 </div>
 
     </div>
+
+    
+<footer class="site-footer">
+	<p class="text">Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type.html">Type Theme</a>
+</p>
+</footer>
 
   </body>
+  
 </html>

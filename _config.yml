@@ -1,30 +1,63 @@
-# Dependencies
-markdown:         redcarpet
-pygments:         true
+# SITE CONFIGURATION
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://pasali.me" # the base hostname & protocol for your site
 
-# Permalinks
-permalink:        pretty
+# THEME-SPECIFIC CONFIGURATION
+theme:
+  # Meta
+  title: Mehmet Başal
+  avatar: avatar.png
+  description: "A website with blog posts, and pages." # used by search engines
+  
+  # Header and footer text
+  header_text: 
+  footer_text: >
+   Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type.html">Type Theme</a>
+  
+  # Icons
+  rss: false
+  email_address: mhmtbsl@gmail.com
+  behance:
+  bitbucket: 
+  dribbble: 
+  facebook: 
+  flickr: 
+  github: "pasali"
+  google_plus: 
+  instagram: 
+  linkedin: https://www.linkedin.com/in/pasali
+  pinterest: 
+  reddit: 
+  soundcloud: 
+  stack_exchange:  # full URL
+  steam: 
+  tumblr: 
+  twitter: "p4s4li"
+  wordpress: 
+  youtube: 
+  
+  # Scripts
+  google_analytics: # tracking id, e.g. "UA-000000-01"
+  disqus_shortname:
+  
+  # Localization strings
+  str_follow_on: "Follow on"
+  str_rss_follow: "Follow RSS feed"
+  str_email: "Email"
+  str_next: "Sonraki"
+  str_prev: "Önceki"
+  str_continue_reading: "Devamını oku"
+  
+  # Colors, typography and padding
+  # Open the "_sass > base" folder, and open "_variables.scss"
 
-# Setup
-title:            Mehmet Başal
-tagline:          'Kişisel Blog'
-description:      'Bilgisayar Mühendisi.'
-url:              http://mhmtbsl.net
-baseurl:          /
+# PAGINATION
+paginate: 5
+paginate_path: "blog/page:num"
 
-author:
-  name:           'Mehmet Başal'
-  url:            https://mhmtbsl.net
-  github:         pasali
-  facebook:        mhmtbsl53
-  twitter:        p4s4li
-  linkedin:       pasali
-  mail:           mhmtbsl@gmail.com
-
-paginate:         5
-
-# Custom vars
-version:          2.1.0
-
-github:
-  repo:
+# BUILD SETTINGS
+markdown: redcarpet
+highlighter: pygments
+sass:
+  sass_dir: _sass
+  style: compressed
