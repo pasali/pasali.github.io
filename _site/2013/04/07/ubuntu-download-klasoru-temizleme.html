@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+  <head>
+	<meta charset="utf-8">
+	<title>Ubuntu Download Klasörü Temizleme | Mehmet Başal</title>
+	<meta name="description" content="Boş zamanlarında sürekli benim gibi film-dizi izleyenlerin genelde (en azından bende öyle) indirilenler klasöründealtyazılar,torrent dosyaları, arşivler ve f...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	
+	<!-- Canonical -->
+	<link rel="canonical" href="http://pasali.me/2013/04/07/ubuntu-download-klasoru-temizleme.html">
+	
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Mehmet Başal" href="http://pasali.me/feed.xml" />
+	
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	
+	<!-- Google Fonts -->
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+	<!-- Google Analytics -->
+	
+</head>
+
+
+  <body>
+    <header class="site-header">
+
+	<div class="branding">
+		
+		<img class="avatar" src="/img/avatar.png" alt=""/>
+		
+		
+		<h1 class="site-title">
+			<a href="/">Mehmet Başal</a>
+		</h1>
+	</div>
+	
+	<nav class="site-nav">
+		<ul>
+			
+				
+			
+				
+				<li>
+					<a class="page-link" href="/about/">Hakkında</a>
+				</li>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:mhmtbsl@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/pasali" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.linkedin.com/in/pasali" title="Follow on LinkedIn">
+		<i class="fa fa-fw fa-linkedin"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/p4s4li" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+		</ul>
+	</nav>
+	
+</header>
+
+
+    <div class="content">
+      <article >
+
+  <header style="background-image: url('/')">
+    <h1 class="title">Ubuntu Download Klasörü Temizleme</h1>
+    
+    <p class="meta">
+    April 7, 2013
+    
+    </p>
+  </header>
+
+  <section class="post-content">
+    <p>Boş zamanlarında sürekli benim gibi film-dizi izleyenlerin genelde (en azından bende öyle) indirilenler klasöründe
+altyazılar,torrent dosyaları, arşivler ve film afişleri gibi bir sürü tek kulanımlık dosyalar olur. Her seferinde elle silmek biraz zaman aldığından bu işi benim için yapacak ufak bir kabuk betiği yazdım.
+&lt;!-- more --&gt;
+Kodlarımız şöyle:
+``` bash</p>
+
+<h1>!/bin/bash</h1>
+
+<p>case &quot;$1&quot; in
+   &quot;-s&quot;)
+        echo &quot; &#39;srt&#39; ve &#39;sub&#39; uzantılı dosyalar silenecek?(e/h)&quot;
+        read secim
+        if [ &quot;$secim&quot;==[eE] ]
+        then
+            rm -rf $HOME/Downloads/<em>.srt &amp;&amp; rm -rf $HOME/Downloads/</em>.sub
+        fi
+    exit 1
+    ;;
+    &quot;-t&quot;)
+        echo &quot;&#39;torrent&#39; uzantılı dosyalar silenecek?(e/h)&quot;
+        read secim
+        if [ &quot;$secim&quot;==[eE] ]
+        then
+            rm -rf $HOME/Downloads/<em>.torrent
+        fi
+    exit 1
+    ;;
+    &quot;-a&quot;)
+        echo &quot;Downloads dizinindeki tüm  dosyalar silenecek?(e/h)&quot;
+        read secim
+        if [ &quot;$secim&quot;==[eE] ]
+        then
+            rm -rf $HOME/Downloads/</em>
+        fi
+        ;;
+    &quot;-n&quot;)
+        path=$(find Downloads/ -type f -name $2)
+        echo $path
+        echo &quot;Silinsin mi?(e/h)&quot;
+        read secim
+        if [ &quot;$secim&quot;==[eE] ]
+        then
+            rm -rf &quot;$path&quot;
+        fi
+        ;;
+    &quot;-e&quot;)
+        echo &quot;$2 uzantılı dosyalar silinecek?(e/h)&quot;
+        read secim
+        if [ &quot;$secim&quot;==[eE] ]
+        then
+            rm -rf Downloads/*.&quot;$2&quot;
+        fi
+        ;;
+esac
+```</p>
+
+<h3>Kodu Çalıştırma</h3>
+
+<p>Öncelikle ev dizinde bin adında bir klasör oluşturun.<br>
+  Betiği bin klasörünün içine atın.<br>
+  Sonra betiğe çalışma izini verin.<br>
+<code>bash
+    sudo chmod +a bin/[dosya_ismi]
+</code>
+.bashrc dosyasına alttaki satırı ekleyin
+<code>bash
+    PATH=$PATH:$HOME/bin
+</code>
+artık dosya ismini yazarak betiği çalıştırabilirsiniz.<br></p>
+
+<h3>Kullanımı</h3>
+
+<p><strong>-t</strong>   =&gt; torrent uzantılı dosyaları siler.<br>
+<strong>-s</strong>   =&gt; srt ver sub uzantlı dosyaları siler.<br>
+<strong>-a</strong>   =&gt; bütün dosyaları siler.<br>
+<strong>-n</strong>   =&gt; verilen isimli dosyayı siler.<br>
+<strong>-e</strong>   =&gt; verilen uzantılı dosyaları siler.<br></p>
+
+<p>Not:</p>
+
+<p>Ubuntuyu Türkçe kullanıyorsanız. Downloads&#39;ı kendinizdeki isimle değiştirin.</p>
+
+  </section>
+
+  <!-- Disqus -->
+  
+  
+</article>
+    </div>
+
+    
+<footer class="site-footer">
+	<p class="text">Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type.html">Type Theme</a>
+</p>
+</footer>
+
+  </body>
+  
+</html>

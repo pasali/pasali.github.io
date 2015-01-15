@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+  <head>
+	<meta charset="utf-8">
+	<title>Linux Terminal Komutları I | Mehmet Başal</title>
+	<meta name="description" content="Az çok linux(Unix) işletim sistemi ile ilgisi olanlar komut satırını kullanmanın sağladığı gücü bilir.Bizde terminal komutlarını giriş yapalım. Burda temel k...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	
+	<!-- Canonical -->
+	<link rel="canonical" href="http://pasali.me/2013/04/07/linux-terminal-komutlari-i.html">
+	
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Mehmet Başal" href="http://pasali.me/feed.xml" />
+	
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	
+	<!-- Google Fonts -->
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+	<!-- Google Analytics -->
+	
+</head>
+
+
+  <body>
+    <header class="site-header">
+
+	<div class="branding">
+		
+		<img class="avatar" src="/img/avatar.png" alt=""/>
+		
+		
+		<h1 class="site-title">
+			<a href="/">Mehmet Başal</a>
+		</h1>
+	</div>
+	
+	<nav class="site-nav">
+		<ul>
+			
+				
+			
+				
+				<li>
+					<a class="page-link" href="/about/">Hakkında</a>
+				</li>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:mhmtbsl@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/pasali" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.linkedin.com/in/pasali" title="Follow on LinkedIn">
+		<i class="fa fa-fw fa-linkedin"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/p4s4li" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+		</ul>
+	</nav>
+	
+</header>
+
+
+    <div class="content">
+      <article >
+
+  <header style="background-image: url('/')">
+    <h1 class="title">Linux Terminal Komutları I</h1>
+    
+    <p class="meta">
+    April 7, 2013
+    
+    </p>
+  </header>
+
+  <section class="post-content">
+    <p>Az çok linux(Unix) işletim sistemi ile ilgisi olanlar komut satırını kullanmanın sağladığı gücü bilir.
+Bizde terminal komutlarını giriş yapalım. Burda temel komutları anlatmayı deneyeceğim. Bende daha öğrenme aşamasında olduğum için
+hatamız olursa kusuruma bakmayın.
+&lt;!-- more --&gt;</p>
+
+<h3>cd</h3>
+
+<p>Açılımı <em>Change Directory</em> Türkçe meali ile &quot;Dizin Değiştir&quot;.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">cd</span> /Dosya/yolu <span class="c">#=&gt; Yolu verilen dizine götürür.</span>
+    <span class="nb">cd</span>             <span class="c">#=&gt; Home(ev) dizinine götürür.</span>
+    <span class="nb">cd</span> ..          <span class="c">#=&gt; Bir üst dizine götürür.</span></code></pre></div>
+
+<h3>pwd</h3>
+
+<p>Açılımı <em>Print Working Directory</em> Türkçe meali ile &quot;Çalışma Dizinini Yazdır&quot;</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nb">pwd</span>            <span class="c">#=&gt; İçinde bulunulan dizini gösterir.</span>
+    /home/mhmt/Downloads</code></pre></div>
+
+<h3>ls</h3>
+
+<p>Açılımı <em>Change Directory</em> Türkçe meali ile &quot;Dizin Değiştir&quot;.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">ls            <span class="c">#=&gt; İçinde bulunulan dizindeki dosya ve klasörleri listeler.</span>
+    ls -a         <span class="c">#=&gt; Bütün gizli dosyalar ve klasörlerle beraber  listeler.</span>
+    ls -l         <span class="c">#=&gt; Dosyaların izinlerini, sahiplerini, boyutlarını</span>
+                  <span class="c">#=&gt; ve son güncellenme tarihlerini ile beraber listeler.</span>
+    ls -d         <span class="c">#=&gt; Sadece dizinleri listeler.</span>
+    ls -ld        <span class="c">#=&gt; Verilen dizinin bilgilerini listeler.</span>
+    ls /dizin     <span class="c">#=&gt; Verilen dizinin içini listeler.</span></code></pre></div>
+
+<h3>mkdir</h3>
+
+<p>Açılımı <em>Make Directory</em> Türkçe meali ile &quot;Dizin Oluştur&quot;.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">mkdir dizin           <span class="c">#=&gt; Dizin adlı klasör oluşturur.</span>
+    mkdir -p foo/bar/baz  <span class="c">#=&gt; İç içe dizinler oluştur.</span></code></pre></div>
+
+<h3>touch</h3>
+
+<p><em>touch</em> verilen isimde dosya oluştur. Eğer dosya varsa günceller.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">touch foo.txt</code></pre></div>
+
+<h3>rm</h3>
+
+<p>&quot;ReMove&quot; verilen dizin yada dosyayı siler.</p>
+
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">rm foo.txt          <span class="c">#=&gt; foo.txt&#39;i siler.</span>
+    rm -d               <span class="c">#=&gt; Boş dizini siler.</span>
+    rm -f               <span class="c">#=&gt; Dizinin boş yada dolu olmasını umursamaz.</span>
+    rm -r               <span class="c">#=&gt; İç içe dizinleri siler.</span></code></pre></div>
+
+  </section>
+
+  <!-- Disqus -->
+  
+  
+</article>
+    </div>
+
+    
+<footer class="site-footer">
+	<p class="text">Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type.html">Type Theme</a>
+</p>
+</footer>
+
+  </body>
+  
+</html>

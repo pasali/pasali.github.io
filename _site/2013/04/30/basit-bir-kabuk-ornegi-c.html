@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html class="no-js">
+
+  <head>
+	<meta charset="utf-8">
+	<title>Basit Bir Shell - C | Mehmet Başal</title>
+	<meta name="description" content="İşletim Sistemleri dersinde C programlama dilinde basit bir kabuk(shell) kodlanmamız istendi. Hocam( Recia Oktaş ) yardımıyla basit bir kabuk oluşturdum. Bur...">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href="/css/main.css">
+	
+	<!--Favicon-->
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+	
+	<!-- Canonical -->
+	<link rel="canonical" href="http://pasali.me/2013/04/30/basit-bir-kabuk-ornegi-c.html">
+	
+	<!-- RSS -->
+	<link rel="alternate" type="application/atom+xml" title="Mehmet Başal" href="http://pasali.me/feed.xml" />
+	
+	<!-- Font Awesome -->
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	
+	<!-- Google Fonts -->
+	<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css">
+	
+	<!-- Google Analytics -->
+	
+</head>
+
+
+  <body>
+    <header class="site-header">
+
+	<div class="branding">
+		
+		<img class="avatar" src="/img/avatar.png" alt=""/>
+		
+		
+		<h1 class="site-title">
+			<a href="/">Mehmet Başal</a>
+		</h1>
+	</div>
+	
+	<nav class="site-nav">
+		<ul>
+			
+				
+			
+				
+				<li>
+					<a class="page-link" href="/about/">Hakkında</a>
+				</li>
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+				
+			
+
+			<!-- Social icons from Font Awesome, if enabled -->
+			
+
+
+<li>
+	<a href="mailto:mhmtbsl@gmail.com" title="Email">
+		<i class="fa fa-fw fa-envelope"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/pasali" title="Follow on GitHub">
+		<i class="fa fa-fw fa-github"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+<li>
+	<a href="https://www.linkedin.com/in/pasali" title="Follow on LinkedIn">
+		<i class="fa fa-fw fa-linkedin"></i>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/p4s4li" title="Follow on Twitter">
+		<i class="fa fa-fw fa-twitter"></i>
+	</a>
+</li>
+
+
+
+
+
+		</ul>
+	</nav>
+	
+</header>
+
+
+    <div class="content">
+      <article >
+
+  <header style="background-image: url('/')">
+    <h1 class="title">Basit Bir Shell - C</h1>
+    
+    <p class="meta">
+    April 30, 2013
+    
+    </p>
+  </header>
+
+  <section class="post-content">
+    <p>İşletim Sistemleri dersinde C programlama dilinde basit bir <strong>kabuk(shell)</strong> kodlanmamız istendi. Hocam( <a href="http://roktas.me/">Recia Oktaş</a> ) yardımıyla basit bir kabuk oluşturdum. Burada size dilim döndüğünce nasıl yaptığımı anlatacağım.
+&lt;!-- more --&gt;</p>
+
+<h4>fork() - exec()</h4>
+
+<p>Ödevin asıl amacı fork-exec mekanizmasını kavramamızdı. Kodları anlayabilmeniz için fork-exec mekanizmasının nasıl çalıştığını bilmeniz gerekiyor. Kabaca <code>fork()</code>, çalışan prosesin bir kopyasını oluştur ve <code>fork()</code>&#39;un bulunduğu satırdan sonra iki farklı proses çalışmaya başlar. <code>exec()</code> ise kopyalanan prosese başka bir programı yerleştirmeye yarar.</p>
+
+<p>Bu bilgiden sonra kodlamaya dönebiliriz. Öncelikle yazacağımız fonksiyonları tanıyalım.</p>
+<div class="highlight"><pre><code class="language-c" data-lang="c">    <span class="kt">void</span>   <span class="nf">argv_free</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+    <span class="kt">int</span>    <span class="nf">run</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+    <span class="kt">int</span>    <span class="nf">parse</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">);</span>
+    <span class="kt">void</span>   <span class="nf">command_cd</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+    <span class="kt">void</span>   <span class="nf">command_exit</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+    <span class="k">struct</span> <span class="kt">command_t</span> <span class="nf">find_command</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">);</span>
+</code></pre></div>
+<p><code>argv_free()</code> fonksiyonu adından da anlaşılacağı gibi <code>malloc()</code> ile ayırdığımız bellek alanlarını boşaltıyor. <code>run()</code> fonksiyonu çalışması istenilen programı çalıştırıyor. <code>parse()</code> ise string şeklinde aldığımız komut ve argümanlarını istediğimiz biçime dönüştürmemizi sağlıyor. <code>command_cd()</code> ise <code>cd</code> komutunun gerçeklemesi. <code>command_exit()</code> ise programın çıkacağı durumlarda devreye giriyor. <code>find_command()</code> ise <code>exec()</code> ile çalıştıramadığımız <code>built-in</code> komutları oluşturduğumuz tabloda arayıp buluyor ve döndürüyor.</p>
+
+<p>Artık tek tek fonksiyonları inceleyebiliriz.</p>
+<div class="highlight"><pre><code class="language-c" data-lang="c">    <span class="kt">void</span>
+    <span class="nf">argv_free</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+    <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>  <span class="n">arguments</span><span class="p">[</span><span class="n">i</span><span class="p">];</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">free</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+            <span class="p">}</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p><code>arguments</code> adında bir dizinin( komut ve argumanları tuttuğumuz dizi ) elemanlarının bellekte tuttuğu alanları boşaltıyor.</p>
+<div class="highlight"><pre><code class="language-c" data-lang="c">    <span class="kt">int</span>
+    <span class="nf">run</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+    <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">status</span><span class="p">;</span>
+            <span class="kt">pid_t</span> <span class="n">pid</span><span class="p">;</span>
+            <span class="n">pid</span> <span class="o">=</span> <span class="n">fork</span><span class="p">();</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">pid</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kt">int</span> <span class="n">ret</span><span class="p">;</span>
+                    <span class="k">if</span> <span class="p">(</span> <span class="o">**</span><span class="n">arguments</span> <span class="o">==</span> <span class="sc">&#39;/&#39;</span><span class="p">)</span>
+                            <span class="n">ret</span> <span class="o">=</span> <span class="n">execv</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">arguments</span><span class="p">);</span>
+                    <span class="k">else</span>
+                            <span class="n">ret</span> <span class="o">=</span> <span class="n">execvp</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">arguments</span><span class="p">);</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">ret</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="n">perror</span><span class="p">(</span><span class="s">&quot;execv&quot;</span><span class="p">);</span>
+                            <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+                    <span class="p">}</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">pid</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;fork&quot;</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">waitpid</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">status</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">perror</span><span class="p">(</span><span class="s">&quot;waitpid&quot;</span><span class="p">);</span>
+                    <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_FAILURE</span><span class="p">);</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p><code>run()</code> ise yukarda belirttiğimiz gibi çalıştırma işlemini gerçekliyor.
+Bunu yaparken <code>fork()</code> ile bir kopya proses oluşturuyor önce, sonra iki alernatifimiz var <code>execv()</code> ve <code>execvp()</code>.
+<code>execv</code> tam dosya yolu ile çalşıyor yani komut satırından <code>/bin/ls</code> gibi bir komut geldiğinde <code>execv</code> devreye giriyor.
+<code>execvp</code> ise verilen komutu <code>PATH</code> te aratıyor. Yani <code>ls</code> diye bir komut geldiğinde bu sefer devreye <code>execvp</code> giriyor.
+2.argüman olarak ikiside komutlardan ve argümanlardan oluşan bir dizi alıyor.(<code>arguments</code>)
+<code>waitpid</code>  ise kabaca kopyalanan prosesin sonlandığından emin olmamızı sağlıyor.</p>
+<div class="highlight"><pre><code class="language-c" data-lang="c">    <span class="kt">int</span>
+    <span class="nf">parse</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="n">string</span><span class="p">)</span>
+    <span class="p">{</span>
+            <span class="kt">char</span> <span class="o">**</span> <span class="n">str_p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">string</span><span class="p">;</span>
+            <span class="kt">char</span> <span class="o">*</span> <span class="n">token</span><span class="p">;</span>
+            <span class="kt">int</span> <span class="n">len</span><span class="p">;</span>
+            <span class="k">struct</span> <span class="kt">command_t</span> <span class="n">ret</span><span class="p">;</span>
+
+            <span class="n">add_history</span><span class="p">(</span><span class="n">string</span><span class="p">);</span>
+            <span class="k">for</span> <span class="p">(</span><span class="n">len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="p">(</span><span class="n">token</span> <span class="o">=</span> <span class="n">strsep</span><span class="p">(</span><span class="n">str_p</span><span class="p">,</span> <span class="s">&quot; </span><span class="se">\t</span><span class="s">&quot;</span><span class="p">));</span> <span class="n">len</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">arguments</span><span class="p">[</span><span class="n">len</span><span class="p">]</span> <span class="o">=</span> <span class="n">strdup</span><span class="p">(</span><span class="n">token</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">arguments</span><span class="p">[</span><span class="n">len</span><span class="p">]</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+            <span class="n">ret</span> <span class="o">=</span> <span class="n">find_command</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">ret</span><span class="p">.</span><span class="n">command</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="n">ret</span><span class="p">.</span><span class="n">handler</span><span class="p">();</span>
+            <span class="p">}</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">komut</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="sc">&#39;/&#39;</span> <span class="o">&amp;&amp;</span> <span class="n">strchr</span><span class="p">(</span><span class="n">komut</span><span class="p">,</span> <span class="sc">&#39;/&#39;</span><span class="p">))</span> <span class="p">{</span>
+                    <span class="n">printf</span><span class="p">(</span><span class="s">&quot;Sadece program adı ya da tam yolu girin !!!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">);</span>
+                    <span class="n">main</span><span class="p">();</span>
+            <span class="p">}</span>
+
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p><code>parse()</code> fonksiyonu komut satırından aldığımız <code>ls -l /home</code> gibi bir stringi bize <code>[&quot;ls&quot;, &quot;-l&quot;, &quot;/home&quot;]</code> şeklinde geri döndürüyor.
+Bunu yapmamızın nedeni ise <code>execv</code> ve <code>execvp</code> argüman dizisi ile çalışıyor olması. Aslında buradaki problem basit bir stringi boşluklara göre
+böl problemi. Bunu çözerken <code>strsep</code> adında bir hazır fonksiyon kullandım. Eğer program bir <code>built-in</code> fonksiyonsa daha önceden oluşturduğumuz tablodan bakıp komutu çalıştırıyor.
+<code>add_history</code> bize komut geçmişi yaratmamızı sağlıyor. Komut ekranında beklerken yön tuşları ile daha önceki komutları erişebiliyoruz.
+Burada bir de kontrol işlemi yapıyoruz. Girilen komut <code>bin/ls</code>  ve ya türevleri şeklindeyse bir uyarı verip tekrar komut istiyoruz.</p>
+<div class="highlight"><pre><code class="language-c" data-lang="c">    <span class="kt">void</span>
+    <span class="nf">command_cd</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+    <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">&quot;~&quot;</span><span class="p">)</span> <span class="o">||</span> <span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">&quot; &quot;</span><span class="p">)</span> <span class="o">||</span> <span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">&quot;&quot;</span><span class="p">))</span> <span class="p">{</span>
+                    <span class="n">chdir</span><span class="p">(</span><span class="n">getenv</span><span class="p">(</span><span class="s">&quot;HOME&quot;</span><span class="p">));</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">&quot;.&quot;</span><span class="p">))</span> <span class="p">{</span>
+                    <span class="cm">/* none */</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="s">&quot;..&quot;</span><span class="p">))</span> <span class="p">{</span>
+                    <span class="kt">char</span> <span class="o">*</span> <span class="n">parent_directory</span> <span class="o">=</span> <span class="n">strrchr</span><span class="p">(</span><span class="n">getenv</span><span class="p">(</span><span class="s">&quot;PWD&quot;</span><span class="p">),</span> <span class="sc">&#39;/&#39;</span><span class="p">);</span>
+                    <span class="kt">char</span> <span class="o">*</span> <span class="n">pwd</span> <span class="o">=</span> <span class="n">getenv</span><span class="p">(</span><span class="s">&quot;PWD&quot;</span><span class="p">);</span>
+                    <span class="kt">int</span> <span class="n">index</span> <span class="o">=</span> <span class="n">parent_directory</span> <span class="o">-</span> <span class="n">pwd</span><span class="p">;</span>
+                    <span class="n">pwd</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="sc">&#39;\0&#39;</span><span class="p">;</span>
+                    <span class="n">chdir</span><span class="p">(</span><span class="n">pwd</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span>
+                    <span class="n">chdir</span><span class="p">(</span><span class="n">arguments</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+            <span class="n">main</span><span class="p">();</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p>Basit bir <code>cd</code> programının gerçeklemesi. İlk <code>if</code> ifadesinde <code>home</code> dizinine gideceğimiz durumları kontrol ediyoruz. <code>chdir()</code> fonksiyonu için
+anlamsız olan ~ ve boşluk karakterleri gelince ne yapacağını söylüyoruz. İkininci blokta ise linux <code>bulunduğumuz dizin</code> anlamına gelen <code>.</code> karaterini soyutluyoruz. Üçüncü blokta ise <code>bir üst dizin</code> anlamına gelen <code>..</code> karaterini soyutluyoruz. Bunu yaparken <code>strrchr</code> fonskiyonunda yardım alıyoruz. Bu fonksiyon  verilen karakteri string içinde arıyor ve en son bulduğu indisten sonraki kısmını döndürüyor. Yani <code>/home/mhmt/Desktop</code> için
+<code>/Desktop</code> döndürecektir. Bu durumda <code>parent_directory</code> <code>/Desktop</code> olacaktır. <code>pwd</code> ise <code>/home/mhmt/Desktop</code> değerini tutacaktır. Pointer aritmetiği sayesinde <code>index</code> yardımı ile son <code>/</code> karakterinin yerini buluyoruz ve sonraki kısmı atıyoruz. Böylece bir üst dizinin yoluna ulaşmış olduk.
+<code>else</code> ile verilen dizin yoluna geçiş yapıyoruz.</p>
+<div class="highlight"><pre><code class="language-c" data-lang="c">    <span class="kt">void</span>
+    <span class="nf">command_exit</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+    <span class="p">{</span>
+            <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_SUCCESS</span><span class="p">);</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p>Anlayacağınız üzere  programdan çıkmamızı sağlıyor.</p>
+<div class="highlight"><pre><code class="language-c" data-lang="c">    <span class="k">struct</span> <span class="kt">command_t</span>
+    <span class="nf">find_command</span><span class="p">(</span><span class="kt">char</span> <span class="o">*</span> <span class="n">cmd</span><span class="p">)</span>
+    <span class="p">{</span>
+            <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+
+            <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">3</span> <span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">cmd</span><span class="p">,</span> <span class="n">commands</span><span class="p">[</span><span class="n">i</span><span class="p">].</span><span class="n">command</span><span class="p">))</span> <span class="p">{</span>
+                            <span class="k">return</span> <span class="n">commands</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+                    <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="n">commands</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+    <span class="p">}</span>
+</code></pre></div>
+<p><code>find_command</code> fonksiyonu aşığadaki tablo da daha önceden yazdığımız <code>built-in</code> komutlarda arama yapıp varsa komutu ilgili fonksiyona döndürüyor.</p>
+<div class="highlight"><pre><code class="language-c" data-lang="c">    <span class="k">struct</span> <span class="kt">command_t</span> <span class="p">{</span>
+            <span class="kt">char</span> <span class="o">*</span><span class="n">command</span><span class="p">;</span>
+            <span class="kt">void</span> <span class="p">(</span><span class="o">*</span><span class="n">handler</span><span class="p">)</span> <span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+        <span class="p">}</span> <span class="n">commands</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="p">{</span><span class="s">&quot;cd&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">command_cd</span><span class="p">},</span>
+            <span class="p">{</span><span class="s">&quot;quit&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">command_exit</span><span class="p">},</span>
+            <span class="p">{</span><span class="s">&quot;exit&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">command_exit</span><span class="p">},</span>
+            <span class="p">{</span><span class="nb">NULL</span><span class="p">,</span> <span class="nb">NULL</span><span class="p">}</span>
+    <span class="p">};</span>
+</code></pre></div>
+<p>Komut ismi ve ilgili fonksiyonun pointerindan  oluşan bir <code>command_t</code> veri tipimiz var. Hemen sonrasında ise bu veri tipi kullanılarak oluşturulmuş bir
+<code>commnands</code> dizisi var. Burada tablo yönemli programlama kullanmamızın nedeni gereksiz <code>if - else</code> bloklarından kaçınmak için.<br>
+``` c
+    int
+    main(void)
+    {
+            for ( ; ; ) {
+                    komut = readline(&quot;#&gt; &quot;);
+                    if (komut == NULL) {
+                            exit(EXIT<em>SUCCESS);
+                    } else if (!strcmp(komut, &quot;&quot;)) {
+                            continue;
+                    } else {
+                            parse(komut);
+                            run();
+                            argv</em>free();
+                    }
+                    free(komut);
+            }
+            atexit(argv_free);</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">        return 0;
+}
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">Ve `main()` fonksiyonumuz. `readline` ile komutumuzu okuyoruz. komut NULL ise (yani ctrl - d ) programdan çıkıyoruz. Boş ise tekrar komut istiyoruz. Ve diğer durumda fonksiyonlarımızı çaığırıyoruz. `atexit` le ayırdığımız bellek alanlarının boşaltındığından emin oluyoruz.  
+
+Kodun tamamına [burdan](https://github.com/pasali/shellim/blob/master/shellim.c) ulaşabilirsiniz.
+</code></pre></div>
+  </section>
+
+  <!-- Disqus -->
+  
+  
+</article>
+    </div>
+
+    
+<footer class="site-footer">
+	<p class="text">Powered by <a href="http://jekyllrb.com">Jekyll</a> with <a href="https://rohanchandra.github.io/project/type.html">Type Theme</a>
+</p>
+</footer>
+
+  </body>
+  
+</html>
