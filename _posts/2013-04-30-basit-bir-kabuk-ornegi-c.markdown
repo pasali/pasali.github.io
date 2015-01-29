@@ -172,6 +172,7 @@ Anlayacağınız üzere  programdan çıkmamızı sağlıyor.
 ```
 Komut ismi ve ilgili fonksiyonun pointerindan  oluşan bir `command_t` veri tipimiz var. Hemen sonrasında ise bu veri tipi kullanılarak oluşturulmuş bir
 `commnands` dizisi var. Burada tablo yönemli programlama kullanmamızın nedeni gereksiz `if - else` bloklarından kaçınmak için.  
+
 ``` c
     int
     main(void)
@@ -194,6 +195,6 @@ Komut ismi ve ilgili fonksiyonun pointerindan  oluşan bir `command_t` veri tipi
             return 0;
     }
 ```
-Ve `main()` fonksiyonumuz. `readline` ile komutumuzu okuyoruz. komut NULL ise (yani ctrl - d ) programdan çıkıyoruz. Boş ise tekrar komut istiyoruz. Ve diğer durumda fonksiyonlarımızı çaığırıyoruz. `atexit` le ayırdığımız bellek alanlarının boşaltındığından emin oluyoruz.  
+Ve `main()` fonksiyonumuz. `readline` ile komutumuzu okuyoruz. komut NULL ise (yani ctrl - d ) programdan çıkıyoruz. Boş ise tekrar komut istiyoruz. Ve diğer durumda fonksiyonlarımızı çağırıyoruz. `atexit` le ayırdığımız bellek alanlarının boşaltındığından emin oluyoruz.  
 
 Kodun tamamına [burdan](https://github.com/pasali/shellim/blob/master/shellim.c) ulaşabilirsiniz.
