@@ -5,7 +5,19 @@
     <atom:link href="http://pasali.me/feed.xml" rel="self" type="application/rss+xml"/>
     <link>http://pasali.me/</link>
     <description>A website with blog posts, and pages.</description>
-    <pubDate>Wed, 14 Jan 2015 23:18:15 +0200</pubDate>
+    <pubDate>Sat, 31 Jan 2015 22:22:12 +0200</pubDate>
+    
+      <item>
+        <title>Effective Go</title>
+        <link>http://pasali.me/2015/01/31/effective-go.html</link>
+        <guid isPermaLink="true">http://pasali.me/2015/01/31/effective-go.html</guid>
+        <description>&lt;p&gt;Son zamanlarda iş dışında Go dili ile ilgileniyorum. Go&amp;#39;nun resmi sitesindeki &lt;a href=&quot;%22https://golang.org/doc/effective_go.html%22&quot;&gt;&amp;quot;Effective Go&amp;quot;&lt;/a&gt; başlığı altında yazılanları kendimce cheatsheet şeklinde
+Türkçe&amp;#39;ye çeviriyorum. Katkıda bulunmak ya da Go öğrenmek isteyen arkadaşlar için buradan paylaşayım dedim.&lt;/p&gt;
+
+&lt;p&gt;Repo linki: https://github.com/pasali/effective-go&lt;/p&gt;
+</description>
+        <pubDate>Sat, 31 Jan 2015 21:58:00 +0200</pubDate>
+      </item>
     
       <item>
         <title>Android - AsyncTask Kullanımı</title>
@@ -515,31 +527,32 @@ anlamsız olan ~ ve boşluk karakterleri gelince ne yapacağını söylüyoruz. 
     &lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Komut ismi ve ilgili fonksiyonun pointerindan  oluşan bir &lt;code&gt;command_t&lt;/code&gt; veri tipimiz var. Hemen sonrasında ise bu veri tipi kullanılarak oluşturulmuş bir
-&lt;code&gt;commnands&lt;/code&gt; dizisi var. Burada tablo yönemli programlama kullanmamızın nedeni gereksiz &lt;code&gt;if - else&lt;/code&gt; bloklarından kaçınmak için.&lt;br&gt;
-``` c
-    int
-    main(void)
-    {
-            for ( ; ; ) {
-                    komut = readline(&amp;quot;#&amp;gt; &amp;quot;);
-                    if (komut == NULL) {
-                            exit(EXIT&lt;em&gt;SUCCESS);
-                    } else if (!strcmp(komut, &amp;quot;&amp;quot;)) {
-                            continue;
-                    } else {
-                            parse(komut);
-                            run();
-                            argv&lt;/em&gt;free();
-                    }
-                    free(komut);
-            }
-            atexit(argv_free);&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;        return 0;
-}
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;Ve `main()` fonksiyonumuz. `readline` ile komutumuzu okuyoruz. komut NULL ise (yani ctrl - d ) programdan çıkıyoruz. Boş ise tekrar komut istiyoruz. Ve diğer durumda fonksiyonlarımızı çaığırıyoruz. `atexit` le ayırdığımız bellek alanlarının boşaltındığından emin oluyoruz.  
+&lt;code&gt;commnands&lt;/code&gt; dizisi var. Burada tablo yönemli programlama kullanmamızın nedeni gereksiz &lt;code&gt;if - else&lt;/code&gt; bloklarından kaçınmak için.  &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-c&quot; data-lang=&quot;c&quot;&gt;    &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;
+    &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;komut&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;readline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;#&amp;gt; &amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;komut&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NULL&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                            &lt;span class=&quot;n&quot;&gt;exit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;EXIT_SUCCESS&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strcmp&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;komut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                            &lt;span class=&quot;k&quot;&gt;continue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                            &lt;span class=&quot;n&quot;&gt;parse&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;komut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+                            &lt;span class=&quot;n&quot;&gt;run&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+                            &lt;span class=&quot;n&quot;&gt;argv_free&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;();&lt;/span&gt;
+                    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;free&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;komut&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;atexit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argv_free&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
 
-Kodun tamamına [burdan](https://github.com/pasali/shellim/blob/master/shellim.c) ulaşabilirsiniz.
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description>
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ve &lt;code&gt;main()&lt;/code&gt; fonksiyonumuz. &lt;code&gt;readline&lt;/code&gt; ile komutumuzu okuyoruz. komut NULL ise (yani ctrl - d ) programdan çıkıyoruz. Boş ise tekrar komut istiyoruz. Ve diğer durumda fonksiyonlarımızı çağırıyoruz. &lt;code&gt;atexit&lt;/code&gt; le ayırdığımız bellek alanlarının boşaltındığından emin oluyoruz.  &lt;/p&gt;
+
+&lt;p&gt;Kodun tamamına &lt;a href=&quot;https://github.com/pasali/shellim/blob/master/shellim.c&quot;&gt;burdan&lt;/a&gt; ulaşabilirsiniz.&lt;/p&gt;
+</description>
         <pubDate>Tue, 30 Apr 2013 18:01:00 +0300</pubDate>
       </item>
     

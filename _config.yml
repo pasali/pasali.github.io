@@ -38,7 +38,7 @@ theme:
   
   # Scripts
   google_analytics: # tracking id, e.g. "UA-000000-01"
-  disqus_shortname:
+  disqus_shortname: pasali
   
   # Localization strings
   str_follow_on: "Follow on"

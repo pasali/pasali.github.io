@@ -295,34 +295,48 @@ anlamsız olan ~ ve boşluk karakterleri gelince ne yapacağını söylüyoruz. 
     <span class="p">};</span>
 </code></pre></div>
 <p>Komut ismi ve ilgili fonksiyonun pointerindan  oluşan bir <code>command_t</code> veri tipimiz var. Hemen sonrasında ise bu veri tipi kullanılarak oluşturulmuş bir
-<code>commnands</code> dizisi var. Burada tablo yönemli programlama kullanmamızın nedeni gereksiz <code>if - else</code> bloklarından kaçınmak için.<br>
-``` c
-    int
-    main(void)
-    {
-            for ( ; ; ) {
-                    komut = readline(&quot;#&gt; &quot;);
-                    if (komut == NULL) {
-                            exit(EXIT<em>SUCCESS);
-                    } else if (!strcmp(komut, &quot;&quot;)) {
-                            continue;
-                    } else {
-                            parse(komut);
-                            run();
-                            argv</em>free();
-                    }
-                    free(komut);
-            }
-            atexit(argv_free);</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">        return 0;
-}
-</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text">Ve `main()` fonksiyonumuz. `readline` ile komutumuzu okuyoruz. komut NULL ise (yani ctrl - d ) programdan çıkıyoruz. Boş ise tekrar komut istiyoruz. Ve diğer durumda fonksiyonlarımızı çaığırıyoruz. `atexit` le ayırdığımız bellek alanlarının boşaltındığından emin oluyoruz.  
+<code>commnands</code> dizisi var. Burada tablo yönemli programlama kullanmamızın nedeni gereksiz <code>if - else</code> bloklarından kaçınmak için.  </p>
+<div class="highlight"><pre><code class="language-c" data-lang="c">    <span class="kt">int</span>
+    <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+    <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span> <span class="p">;</span> <span class="p">;</span> <span class="p">)</span> <span class="p">{</span>
+                    <span class="n">komut</span> <span class="o">=</span> <span class="n">readline</span><span class="p">(</span><span class="s">&quot;#&gt; &quot;</span><span class="p">);</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">komut</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="n">exit</span><span class="p">(</span><span class="n">EXIT_SUCCESS</span><span class="p">);</span>
+                    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">strcmp</span><span class="p">(</span><span class="n">komut</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">))</span> <span class="p">{</span>
+                            <span class="k">continue</span><span class="p">;</span>
+                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                            <span class="n">parse</span><span class="p">(</span><span class="n">komut</span><span class="p">);</span>
+                            <span class="n">run</span><span class="p">();</span>
+                            <span class="n">argv_free</span><span class="p">();</span>
+                    <span class="p">}</span>
+                    <span class="n">free</span><span class="p">(</span><span class="n">komut</span><span class="p">);</span>
+            <span class="p">}</span>
+            <span class="n">atexit</span><span class="p">(</span><span class="n">argv_free</span><span class="p">);</span>
 
-Kodun tamamına [burdan](https://github.com/pasali/shellim/blob/master/shellim.c) ulaşabilirsiniz.
+            <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
 </code></pre></div>
+<p>Ve <code>main()</code> fonksiyonumuz. <code>readline</code> ile komutumuzu okuyoruz. komut NULL ise (yani ctrl - d ) programdan çıkıyoruz. Boş ise tekrar komut istiyoruz. Ve diğer durumda fonksiyonlarımızı çağırıyoruz. <code>atexit</code> le ayırdığımız bellek alanlarının boşaltındığından emin oluyoruz.  </p>
+
+<p>Kodun tamamına <a href="https://github.com/pasali/shellim/blob/master/shellim.c">burdan</a> ulaşabilirsiniz.</p>
+
   </section>
 
   <!-- Disqus -->
+  
+    <section class="comments">
+      <div id="disqus_thread"></div>
+<script type="text/javascript">
+	var disqus_shortname = 'pasali'; 
+	(function() {
+		var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+		dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+		(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	})();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </section>
   
   
 </article>

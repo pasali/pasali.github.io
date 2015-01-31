@@ -3,8 +3,8 @@
 
   <head>
 	<meta charset="utf-8">
-	<title>Ubuntu Kalıcı DNS Ayarı | Mehmet Başal</title>
-	<meta name="description" content="Ubuntuda DNS değiştirme işlemini konsoldan nasıl yaparız?Öncelikle ctrl+alt+t ile konsolumuzu açıyoruz.Sonra alttaki kodu giriyoruz.">
+	<title>Effective Go | Mehmet Başal</title>
+	<meta name="description" content="Son zamanlarda iş dışında Go dili ile ilgileniyorum. Go&#39;nun resmi sitesindeki &quot;Effective Go&quot; başlığı altında yazılanları kendimce cheatsheet şe...">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<!-- CSS -->
@@ -14,7 +14,7 @@
 	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 	
 	<!-- Canonical -->
-	<link rel="canonical" href="http://pasali.me/2013/04/07/ubuntu-kalici-dns-ayari.html">
+	<link rel="canonical" href="http://pasali.me/2015/01/31/effective-go.html">
 	
 	<!-- RSS -->
 	<link rel="alternate" type="application/atom+xml" title="Mehmet Başal" href="http://pasali.me/feed.xml" />
@@ -139,48 +139,19 @@
       <article >
 
   <header style="background-image: url('/')">
-    <h1 class="title">Ubuntu Kalıcı DNS Ayarı</h1>
+    <h1 class="title">Effective Go</h1>
     
     <p class="meta">
-    April 7, 2013
+    January 31, 2015
     
     </p>
   </header>
 
   <section class="post-content">
-    <p><strong>Ubuntu</strong>da DNS değiştirme işlemini konsoldan nasıl yaparız?<br>
-Öncelikle <strong>ctrl+alt+t</strong> ile konsolumuzu açıyoruz.
-Sonra alttaki kodu giriyoruz.</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">    sudo gedit /etc/resolv.conf
-</code></pre></div>
-<p>Burda <strong>gedit</strong> yerine siz hangi metin editörünü kullanıyorsanız onu yazabilirsiniz.<br>
-Sonra açılan pencerede isteğiniz DNS <strong>nameserver x.x.x.x</strong> şeklinde yazabilirsiniz.<br>
-Örneğin google DNS için:
-&lt;!-- more --&gt;</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">    nameserver 8.8.8.8
-    nameserver 8.8.4.4
-</code></pre></div>
-<p>satırlarını <strong>resolv.conf</strong> dosyasına ekleyin.
-Sonrada</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">    sudo chattr +i /etc/resolv.conf
-</code></pre></div>
-<p>diyerek herhangi bir şekilde bu dosyanın resetlenmesini engelleyebilirsiniz.(sudo ile bile değiştirilemez olur.)
-Bu özelliği kaldırmak içinse</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">    sudo chattr -i /etc/resolv.conf
-</code></pre></div>
-<p>kodunu kullanabilirsiniz.</p>
+    <p>Son zamanlarda iş dışında Go dili ile ilgileniyorum. Go&#39;nun resmi sitesindeki <a href="%22https://golang.org/doc/effective_go.html%22">&quot;Effective Go&quot;</a> başlığı altında yazılanları kendimce cheatsheet şeklinde
+Türkçe&#39;ye çeviriyorum. Katkıda bulunmak ya da Go öğrenmek isteyen arkadaşlar için buradan paylaşayım dedim.</p>
 
-<p><strong>Not:</strong> 12.04 sürümünde chattr işe yaramıyor.Bunun nedenide resolv.conf dosyasının link olması dosyayı silip yeniden oluşturup yukardaki adımları uyguluyabilrisiniz.<br>
-Ya da</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">    sudo gedit /etc/dhcp/dhclient.conf
-</code></pre></div>
-<p>Sonarada aşağıdaki yeri değiştirin</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">    prepend domain-name-servers x.x.x.x, y.y.y.y;
-</code></pre></div>
-<p>Örnek:</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">    prepend domain-name-servers 8.8.8.8, 8.8.4.4;
-</code></pre></div>
-<p>değiştirerek ayarlayabilirsiniz.</p>
+<p>Repo linki: https://github.com/pasali/effective-go</p>
 
   </section>
 
