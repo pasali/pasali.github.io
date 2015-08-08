@@ -14,7 +14,6 @@ Sonra alttaki kodu giriyoruz.
 Burda **gedit** yerine siz hangi metin editörünü kullanıyorsanız onu yazabilirsiniz.<br>
 Sonra açılan pencerede isteğiniz DNS **nameserver x.x.x.x** şeklinde yazabilirsiniz.<br>
 Örneğin google DNS için:
-<!-- more -->
 
         nameserver 8.8.8.8
         nameserver 8.8.4.4

@@ -5,4 +5,4 @@ permalink: /about/
 feature-img: "img/sample_feature_img_2.png"
 ---
 
-TODO
+Merhaba, Ben Mehmet. Şuan özel bir şirkette Yazılım Mühendisi olarak çalışıyorum. Blogumda yazılım ve teknoloji dünyasına ait tecrübelerimi paylaşıyorum.

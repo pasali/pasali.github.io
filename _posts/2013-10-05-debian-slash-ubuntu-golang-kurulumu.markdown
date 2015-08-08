@@ -6,7 +6,7 @@ comments: true
 categories:
 ---
 Sisteminize uygun sürümü [indirin](http://code.google.com/p/go/downloads/list)
-Eğer önceden kurulum yaptıysanız aşağıdaki komutu çalıştırın <!-- more -->
+Eğer önceden kurulum yaptıysanız aşağıdaki komutu çalıştırın
 
         $ rm -r /usr/local/go
 

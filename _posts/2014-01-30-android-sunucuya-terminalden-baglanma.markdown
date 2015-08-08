@@ -8,7 +8,7 @@ categories:
 
 Android üzerinde çalışan bir sunucuya terminalden nasıl bağlanırız ?   
 Öncelikle sunucunun `1234` nolu port üzerinde çalıştığını varsayalım. Uygulamanızı
-AVD üzerinde çalıştırın ve sunucuyu aktif hale getirin. <!-- more -->Şimdi `telnet` ile AVD
+AVD üzerinde çalıştırın ve sunucuyu aktif hale getirin. Şimdi `telnet` ile AVD
 ye bağlanmamız gerek. AVD'nin port numarası pencere başlığında yazar.(genelde
 5554 tür)
 

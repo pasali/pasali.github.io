@@ -12,7 +12,6 @@ sormadan *Windows* mu açılıyor ?
 
  Öncelikle elinizde bir **Ubuntu liveCD** olmadığını var sayıyorum ve *Windows* üzeriden neler yapabileceğimiz kısımdan yani *Ubuntu*yu nasıl *Windows*un boot menünüsüne ekleriz ondan
 bahsedeyim.
-<!-- more -->
 
  EasyBCD adılı program sayesinde bu işlemi gerçekleştirebiliriz.
  [Burdan](http://download.chip.eu/tr/EasyBCD-1.72_177662.html) free sürümünü indirebilirsiniz.

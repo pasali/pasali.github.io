@@ -8,7 +8,6 @@ categories:
 Az çok linux(Unix) işletim sistemi ile ilgisi olanlar komut satırını kullanmanın sağladığı gücü bilir.
 Bizde terminal komutlarını giriş yapalım. Burda temel komutları anlatmayı deneyeceğim. Bende daha öğrenme aşamasında olduğum için
 hatamız olursa kusuruma bakmayın.
-<!-- more -->
 
 ### cd
 

@@ -11,7 +11,7 @@ türüne göre kullanıcıya istediğiniz durumlarda bilgi verebilirsiniz. Mesel
 doviz uygulaması geliştiriyorsunuz ve dolar belirli bir seviyenin üstüne
 çıktığında ya da düştüğünde kullanıcıyı bilgilendirmek isteyebilirsiniz.   
 
-Oluşturma işlemini adımlara bölersek: <!-- more -->
+Oluşturma işlemini adımlara bölersek:
 
 - Bildirimi tıklanınca açılcak sınıfı ayarlama
 - Başka bir buton eklenecekse onun için açılcak sınıf ve ya çalışacak

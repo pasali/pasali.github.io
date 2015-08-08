@@ -7,8 +7,8 @@ categories:
 ---
 Boş zamanlarında sürekli benim gibi film-dizi izleyenlerin genelde (en azından bende öyle) indirilenler klasöründe
 altyazılar,torrent dosyaları, arşivler ve film afişleri gibi bir sürü tek kulanımlık dosyalar olur. Her seferinde elle silmek biraz zaman aldığından bu işi benim için yapacak ufak bir kabuk betiği yazdım.
-<!-- more -->
 Kodlarımız şöyle:
+
 ``` bash
 #!/bin/bash
 case "$1" in

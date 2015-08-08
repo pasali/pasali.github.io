@@ -11,7 +11,7 @@ bir Android sınıfı. Bilindiği üzere bazı sebeblerden (mesela `performans`)
 Android'i geliştiren abilerimiz ana thread bazı işlemleri yapmamızı
 yasaklamışlar(`Network` işlemleri gibi). Kullanmamız için bize `Thread` sınıfını
 özelleştirip `AsyncTask` sınıfını sunmuşlar. `Thread`lerden farklı olarak
-arka plan işlemi hakkında aşama aşama bilgi sahibi olabiliyoruz. <!-- more -->  
+arka plan işlemi hakkında aşama aşama bilgi sahibi olabiliyoruz.
 
 ### Nasıl Kullanılır ?
 

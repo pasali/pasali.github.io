@@ -8,7 +8,7 @@ Fork bombası, bir prosesin kendini sürekli kopyalarak kullanılarbilir sistem 
 CPU ve RAM’i meşgul ederek bilgisayarınızın donmasına neden olur. 
 # Fork Bombası Nasıl Yapılır ?
 
-Unix türevi bir işletim sistemi kullanıyorsanız, fork sistem çağrısını kullanararak bir fork bombası yapabilirsiniz.<!-- more -->
+Unix türevi bir işletim sistemi kullanıyorsanız, fork sistem çağrısını kullanararak bir fork bombası yapabilirsiniz.
 fork fonksiyonu bulunduğu prosesin bir kopyasını oluşturur. exec fonksiyonu ilede o kopya prosese isteğiniz bir programı gömebilirsiniz.
 Eğer siz fonksiyonu sonsuz döngüye sokup sürekli kendini kopyalamasını sağlarsınız elinizde nur topu gibi bir fork bombanız olur.
 Çeşitli dillerde gerçekleme yapabilirsiniz. Bir kaç örnek vermek gerekirse:

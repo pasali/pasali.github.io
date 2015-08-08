@@ -6,7 +6,7 @@ comments: true
 keywords: android, network, thread, exception
 ---
 Eğer network işlemleri yapan bir android uygulaması geliştiriyorsanız, büyük ihtimal ile yukarıda başlıkta yazdığım hata ile 
-karşılaşmıssınızdır. <!-- more -->
+karşılaşmıssınızdır.
 Aslında internette çok küçük bir araştırma yaparak bu konu hakkında yazılmış sorulara ve verilen cevaplara ulaşabilirsiniz.
 
 Ben biraz bu hata nedir ondan bahsedeyim. Kabaca ismine bakarsak, “ana threadte(iş parçasında) network işlemi yapıyorsun” diyor. Android işletim sistemini geliştiren abilerimiz buna izin vermemişler. Bu şekilde tasarlamalarının sebebi ise ağır işlerin ana threadte yapılmasının performansı düşürmesidir.

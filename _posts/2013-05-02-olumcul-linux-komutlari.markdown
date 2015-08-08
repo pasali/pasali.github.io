@@ -9,7 +9,6 @@ Bilindiği üzere linux çok güçlü bir komut kümesine sahip. Tabii ki büyü
 Ne yaptığınızdan emin değilseniz kullanmamanız gereken komutlar olsun ya da çok kullandığınız bir komutun yanlış kullanımı olsun bunlar
 sisteminize büyük zarar verebilir. Komut satırı kullanma aşkıyla internette gördüğünüz her komutu direk kopyala yapıştır yaparsanız
 sisteminiz yine göçebilir.  Şimdi biraz bu "ölümcül" komutlardan bahsedelim.  
-<!--more-->
 ## rm -rf /
 
 `rm` komutunu genellikle çok fazla kullanırız. Mahsum bir dosya/dizin silmeye yarayan komut. Ama yukardaki argümanlar `rm`'nin

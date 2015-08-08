@@ -7,7 +7,6 @@ categories:
 ---
 
 İşletim Sistemleri dersinde C programlama dilinde basit bir **kabuk(shell)** kodlanmamız istendi. Hocam( [Recia Oktaş](http://roktas.me/) ) yardımıyla basit bir kabuk oluşturdum. Burada size dilim döndüğünce nasıl yaptığımı anlatacağım.
-<!-- more -->
 #### fork() - exec()
 Ödevin asıl amacı fork-exec mekanizmasını kavramamızdı. Kodları anlayabilmeniz için fork-exec mekanizmasının nasıl çalıştığını bilmeniz gerekiyor. Kabaca `fork()`, çalışan prosesin bir kopyasını oluştur ve `fork()`'un bulunduğu satırdan sonra iki farklı proses çalışmaya başlar. `exec()` ise kopyalanan prosese başka bir programı yerleştirmeye yarar.
 
