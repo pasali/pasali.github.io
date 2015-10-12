@@ -177,11 +177,11 @@ Uygulamayı çalıştırıp, "localhost:3333/users" adresine aşağıdaki gibi b
  			"email": "mhmtbsl@gmail.com"
 		}
 
-Artık updateHandler, deleteHandler ve getHandler işlevlerinide yazabiliriz. `rootHandler` fonksiyonuna artık ihtiyacımız yok, kaldırabiliriz.
+Artık updateHandler, deleteHandler ve getHandler işlevlerinide yazabiliriz ve `rootHandler` fonksiyonuna ihtiyacımız yok, kaldırabiliriz.
 
-`http.ListenAndServe(":3333", nil)` => burada nil vermek, Go'ya onun default ServeMux'unu kullanmak istiyoruz demek. Go'nın bult-in ServeMux çok esnek ve kullanışlı değil. Yani "/users/1" gibi bir URL oluşturmak isterseniz third-party bir kutuphane kullanmanız gerekiyor. Bizde şuan en çok kullanılan Gorilla projesinin Mux kütüphanesini kullanacağız. Kullanımı oldukça basit ve anlaşılır.
+`http.ListenAndServe(":3333", nil)` => buradaki nil parametresi, Go'ya onun default ServeMux'unu kullanmak istiyoruz demek. Go'nın bult-in ServeMux çok esnek ve kullanışlı değil. Yani "/users/1" gibi bir URL oluşturmak isterseniz third-party bir kutuphane kullanmanız gerekiyor. Bizde şuan en çok kullanılan Gorilla projesinin Mux kütüphanesini kullanacağız. Kullanımı oldukça basit ve anlaşılır.
 
-Şimdi RESTful web servislerinde bilindiği üzere her endpoint sunucuda bir resource denk gelmek zorundadır. Resource ise kendine özgü metodları olan bir veri yapısı olarak düşünülebilir. Bu resource'lar için tanımlı standart metodlar tanımlanmış bulunmakta bunlar sırasıyla; GET, POST, PUT ve DELETE. Bizim tek resource'umuz User olduğuna göre enpointlerimizi buna göre tasarlamaya başlayabiliriz.
+RESTful web servislerinde bilindiği üzere her endpoint sunucuda bir resource denk gelmek zorundadır. Resource ise kendine özgü metodları olan bir veri yapısı olarak düşünülebilir. Bu resource'lar için tanımlı standart metodlar tanımlanmış bulunmakta bunlar sırasıyla; GET, POST, PUT ve DELETE. Bizim tek resource'umuz User olduğuna göre enpointlerimizi buna göre tasarlamaya başlayabiliriz.
 
 `/users` => Bu endpoint'e POST methodu ile gelecek anlamlı JSON'lar  sunucuda bir User oluşacak.
 
