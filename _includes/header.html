@@ -1,15 +1,15 @@
 <header class="site-header">
 
 	<div class="branding">
-		{% if site.theme.avatar %}
-		<img class="avatar" src="/img/{{ site.theme.avatar }}" alt=""/>
+		{% if site.mytheme.avatar %}
+		<img class="avatar" src="/img/{{ site.mytheme.avatar }}" alt=""/>
 		{% endif %}
-		
+
 		<h1 class="site-title">
-			<a href="{{ site.baseurl }}/">{{ site.theme.title }}</a>
+			<a href="{{ site.baseurl }}/">{{ site.mytheme.title }}</a>
 		</h1>
 	</div>
-	
+
 	<nav class="site-nav">
 		<ul>
 			{% for page in site.pages %}
@@ -24,5 +24,5 @@
 			{% include icons.html %}
 		</ul>
 	</nav>
-	
+
 </header>
